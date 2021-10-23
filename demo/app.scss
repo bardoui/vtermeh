@@ -1,0 +1,42 @@
+@import "@bardoui/termeh/scss/core.scss";
+// Setting vars
+@include _var("font", "family", "calibri");
+@include _var("font", "size", 13px);
+@include _color("primary", #2b9348, true);
+// Loading modules
+@import "@bardoui/termeh/scss/reset.scss";
+@import "@bardoui/termeh/scss/component/layout.scss";
+@import "@bardoui/termeh/scss/component/container.scss";
+@import "@bardoui/termeh/scss/component/button.scss";
+@import "@bardoui/termeh/scss/component/flex.scss";
+@import "@bardoui/termeh/scss/component/icon.scss";
+@import "@bardoui/termeh/scss/component/card.scss";
+@import "@bardoui/termeh/scss/component/gaper.scss";
+@import "@bardoui/termeh/scss/component/landscape.scss";
+// Components
+@import "@/choose.scss";
+@import "@/pagination.scss";
+
+// Custom styling
+#app {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1rem;
+    background: _palette("shade", "50");
+}
+section {
+    display: block;
+    padding: 1rem;
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+code {
+    white-space: pre;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    color: readable(_color("primary"), _color("base"));
+}

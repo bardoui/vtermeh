@@ -1,0 +1,69 @@
+.choose {
+    @include control();
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    user-select: none;
+    background: _color("input");
+    border: 1px solid _color("separator");
+    border-radius: _var("radius", "normal");
+    padding: e-pad(_gap("element"));
+
+    > .item {
+        display: block;
+        flex: 1;
+        line-height: 1;
+        box-sizing: border-box;
+        text-align: center;
+        margin: half-of(_var("decoration", "size", 2px));
+        padding: e-pad(_gap("element"));
+        border-radius: _var("radius", "normal");
+        cursor: default;
+        transition: all _var("transition", "duration")
+            _var("transition", "ease");
+
+        &:not(.is-active):hover {
+            background: _color("separator");
+        }
+
+        &.is-active {
+            background: _color("shade");
+            color: foreground(_color("shade"));
+        }
+    }
+
+    &.is-disabled {
+        @include locked();
+        background: _palette("shade", "50");
+        border-color: _palette("shade", "100");
+        color: _color("mute") !important;
+
+        > .item {
+            &.is-active {
+                background: _palette("shade", "100") !important;
+                color: _color("mute") !important;
+            }
+        }
+    }
+
+    &.is-stacked {
+        flex-direction: column;
+    }
+
+    @each $label, $color in _colors(_var("choose", "colors", ())) {
+        &.is-#{$label} {
+            > .item.is-active {
+                background: $color;
+                color: foreground($color);
+            }
+        }
+    }
+
+    @each $device, $mq in _breakpoints() {
+        @media #{$mq} {
+            &.is-#{$device}-stacked {
+                flex-direction: column;
+            }
+        }
+    }
+}

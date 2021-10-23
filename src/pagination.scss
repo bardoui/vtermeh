@@ -1,0 +1,107 @@
+.pagination {
+    @include control();
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    overflow: hidden;
+    overflow-x: auto;
+    padding: _gap("element");
+
+    > .page {
+        display: block;
+        box-sizing: content-box;
+        min-width: 1em;
+        height: 1em;
+        margin: 0 _var("decoration", "size", 2px);
+        padding: half-of(_gap("element"));
+        line-height: 1em;
+        text-align: center;
+        background: _color("section");
+        border-radius: _var("radius", "normal");
+        transition: all _var("transition", "duration")
+            _var("transition", "ease");
+
+        > .arrow {
+            border: solid currentColor;
+            border-width: 0 _var("decoration", "size", 2px)
+                _var("decoration", "size", 2px) 0;
+            display: inline-block;
+            padding: _var("decoration", "size", 2px);
+
+            &.is-right {
+                transform: rotate(-45deg);
+            }
+
+            &.is-left {
+                transform: rotate(135deg);
+            }
+        }
+
+        &.is-disabled {
+            @include locked();
+            background: _palette("shade", "50");
+            color: _color("mute");
+
+            > .arrow {
+                border-color: _color("mute");
+            }
+        }
+
+        &:not(.is-disabled):not(.is-active) {
+            cursor: pointer;
+            &:hover {
+                background: _palette("shade", "100");
+            }
+        }
+
+        &:not(.is-disabled).is-active {
+            background: _color("shade");
+            color: foreground(_color("shade"));
+        }
+    }
+
+    &:not(.is-flat) {
+        background: _color("input");
+        border: 1px solid _color("separator");
+        border-radius: _var("radius", "normal");
+        padding: e-pad(_gap("element"));
+    }
+
+    &.is-disabled {
+        @include locked();
+
+        > .page {
+            background: _palette("shade", "50");
+            color: _color("mute");
+
+            &.is-active {
+                background: _palette("shade", "100");
+                color: _color("foreground");
+            }
+
+            > .arrow {
+                border-color: _color("mute") !important;
+            }
+        }
+    }
+
+    &.is-rounded {
+        border-radius: _var("radius", "rounded");
+        > .page {
+            border-radius: _var("radius", "rounded");
+        }
+    }
+
+    @each $label, $color in _colors(_var("pagination", "colors", ())) {
+        &.is-#{$label} {
+            > .page {
+                &:not(.is-disabled).is-active {
+                    background: $color;
+                    color: foreground($color);
+                }
+            }
+        }
+    }
+}
