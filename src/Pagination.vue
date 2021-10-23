@@ -40,7 +40,7 @@ const props = defineProps({
 });
 
 // Methods
-const N = v => (v && Number.isFinite(+v) ? +v : 0);
+const N = (v: any) => (v && Number.isFinite(+v) ? +v : 0);
 // States
 const _v = ref(0);
 const value = computed({
