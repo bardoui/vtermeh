@@ -21,7 +21,7 @@
                     </section>
                     <section>
                         <h3>Choose</h3>
-                        <div class="gaper is-mobile-stacked">
+                        <div class="gaper is-auto is-mobile-stacked">
                             <vChoose
                                 class="is-mobile-stacked"
                                 :items="items"
@@ -39,8 +39,8 @@
                     </section>
                     <section>
                         <h3>Pagination</h3>
-                        <div class="flex is-mobile-stacked">
-                            <div class="flex-item">
+                        <div class="grid">
+                            <div class="column is-mobile-full">
                                 <vPagination
                                     :count="5"
                                     :total="total"
@@ -50,7 +50,7 @@
                                     No Records
                                 </vPagination>
                             </div>
-                            <div class="flex-item">
+                            <div class="column is-mobile-full">
                                 <vPagination
                                     :count="5"
                                     :total="total"
@@ -62,12 +62,16 @@
                                 </vPagination>
                             </div>
                             <div class="break"></div>
-                            <div class="flex-item">
-                                <button @click="page = 'bla'">invalid</button>
-                                <button @click="page = 100">100</button>
-                                <button @click="page = 7">7</button>
+                            <div class="column is-mobile-full">
+                                <div class="components">
+                                    <button class="is-left-attached is-error" @click="page = 'bla'">
+                                        invalid
+                                    </button>
+                                    <button class="is-attached is-primary" @click="page = 100">100</button>
+                                    <button class="is-right-attached" @click="page = 7">7</button>
+                                </div>
                             </div>
-                            <div class="flex-item">
+                            <div class="column is-mobile-full">
                                 <p>
                                     <strong>Current Page:</strong>
                                     <span>{{ page }}</span>

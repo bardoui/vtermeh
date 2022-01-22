@@ -1,68 +1,79 @@
-.choose {
-    @include control();
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+
+$-colors: T.var("choose", "colors", ());
+$-background: T.color("background");
+$-foreground: T.color("foreground");
+$-decorator: T.var("decorator", "size", 2px);
+
+.v-choose {
     display: flex;
     flex-direction: row;
     align-items: center;
     user-select: none;
-    background: _color("input");
-    border: 1px solid _color("separator");
-    border-radius: _var("radius", "normal");
-    padding: e-pad(_gap("element"));
+    box-sizing: border-box;
+    background: T.color("input");
+    border: 1px solid T.color("separator");
+    border-radius: T.var("radius", "normal");
+    padding: T.el-pad(T.gap("element"));
 
     > .item {
         display: block;
-        flex: 1;
+        flex: 1 1 auto;
         line-height: 1;
-        box-sizing: border-box;
+        cursor: pointer;
         text-align: center;
-        margin: half-of(_var("decoration", "size", 2px));
-        padding: e-pad(_gap("element"));
-        border-radius: _var("radius", "normal");
-        cursor: default;
-        transition: all _var("transition", "duration")
-            _var("transition", "ease");
+        box-sizing: border-box;
+        margin: math.div($-decorator, 2);
+        padding: T.el-pad(T.gap("element"));
+        border-radius: T.var("radius", "normal");
+        transition: all T.transition-params();
 
         &:not(.is-active):hover {
-            background: _color("separator");
+            $bg: T.muted($-background, T.color("shade"), false);
+            background-color: $bg;
+            color: T.readable($bg, $-foreground);
         }
 
         &.is-active {
-            background: _color("shade");
-            color: foreground(_color("shade"));
+            background: T.color("shade");
+            color: T.readable(T.color("shade"), $-foreground);
         }
     }
 
     &.is-disabled {
-        @include locked();
-        background: _palette("shade", "50");
-        border-color: _palette("shade", "100");
-        color: _color("mute") !important;
+        @include T.locked();
+        background: T.disabled($-background) !important;
+        border-color: T.disabled($-background, true) !important;
+        color: T.muted($-background, $-foreground) !important;
 
         > .item {
             &.is-active {
-                background: _palette("shade", "100") !important;
-                color: _color("mute") !important;
+                background: T.disabled($-background, true) !important;
+                color: T.muted($-background, $-foreground) !important;
             }
         }
     }
 
     &.is-stacked {
         flex-direction: column;
+        align-items: stretch;
     }
 
-    @each $label, $color in _colors(_var("choose", "colors", ())) {
-        &.is-#{$label} {
+    @each $name, $color in T.colors($-colors) {
+        &.is-#{$name} {
             > .item.is-active {
                 background: $color;
-                color: foreground($color);
+                color: T.foreground($color);
             }
         }
     }
 
-    @each $device, $mq in _breakpoints() {
-        @media #{$mq} {
+    @each $device, $query in T.media-queries() {
+        @media #{$query} {
             &.is-#{$device}-stacked {
                 flex-direction: column;
+                align-items: stretch;
             }
         }
     }

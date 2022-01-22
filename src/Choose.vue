@@ -1,5 +1,5 @@
 <template>
-    <div class="choose">
+    <div class="v-choose">
         <template v-for="(item, index) in items" :key="index">
             <div
                 class="item"

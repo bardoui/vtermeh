@@ -1,5 +1,12 @@
-.pagination {
-    @include control();
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+
+$-colors: T.var("pagination", "colors", ());
+$-background: T.color("background");
+$-foreground: T.color("foreground");
+$-decorator: T.var("decorator", "size", 2px);
+
+.v-pagination {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -7,29 +14,26 @@
     user-select: none;
     overflow: hidden;
     overflow-x: auto;
-    padding: _gap("element");
     direction: ltr;
+    padding: T.gap("element");
 
     > .page {
         display: block;
         box-sizing: content-box;
         min-width: 1em;
         height: 1em;
-        margin: 0 _var("decoration", "size", 2px);
-        padding: half-of(_gap("element"));
         line-height: 1em;
         text-align: center;
-        background: _color("section");
-        border-radius: _var("radius", "normal");
-        transition: all _var("transition", "duration")
-            _var("transition", "ease");
+        margin: 0 $-decorator;
+        padding: math.div(T.gap("element"), 2);
+        border-radius: T.var("radius", "normal");
+        transition: all T.transition-params();
 
         > .arrow {
-            border: solid currentColor;
-            border-width: 0 _var("decoration", "size", 2px)
-                _var("decoration", "size", 2px) 0;
             display: inline-block;
-            padding: _var("decoration", "size", 2px);
+            border: solid currentColor;
+            border-width: 0 $-decorator $-decorator 0;
+            padding: $-decorator;
 
             &.is-right {
                 transform: rotate(-45deg);
@@ -41,66 +45,68 @@
         }
 
         &.is-disabled {
-            @include locked();
-            background: _palette("shade", "50");
-            color: _color("mute");
+            @include T.locked();
+            background: none !important;
+            color: T.muted($-background, $-foreground) !important;
 
             > .arrow {
-                border-color: _color("mute");
+                border-color: T.muted($-background, $-foreground) !important;
             }
         }
 
         &:not(.is-disabled):not(.is-active) {
             cursor: pointer;
+
             &:hover {
-                background: _palette("shade", "100");
+                $bg: T.muted($-background, T.color("shade"), false);
+                background-color: $bg;
+                color: T.readable($bg, $-foreground);
             }
         }
 
         &:not(.is-disabled).is-active {
-            background: _color("shade");
-            color: foreground(_color("shade"));
+            background: T.color("shade");
+            color: T.readable(T.color("shade"), $-foreground);
         }
     }
 
     &:not(.is-flat) {
-        background: _color("input");
-        border: 1px solid _color("separator");
-        border-radius: _var("radius", "normal");
-        padding: e-pad(_gap("element"));
+        background: T.color("input");
+        border: 1px solid T.color("separator");
+        border-radius: T.var("radius", "normal");
+        padding: T.el-pad(T.gap("element"));
     }
 
     &.is-disabled {
-        @include locked();
+        @include T.locked();
 
         > .page {
-            background: _palette("shade", "50");
-            color: _color("mute");
+            color: T.muted($-background, $-foreground) !important;
 
             &.is-active {
-                background: _palette("shade", "100");
-                color: _color("foreground");
+                background: T.disabled($-background) !important;
+                color: T.muted($-background, $-foreground) !important;
             }
 
             > .arrow {
-                border-color: _color("mute") !important;
+                color: T.muted($-background, $-foreground) !important;
             }
         }
     }
 
     &.is-rounded {
-        border-radius: _var("radius", "rounded");
+        border-radius: T.var("radius", "rounded");
         > .page {
-            border-radius: _var("radius", "rounded");
+            border-radius: T.var("radius", "rounded");
         }
     }
 
-    @each $label, $color in _colors(_var("pagination", "colors", ())) {
-        &.is-#{$label} {
+    @each $name, $color in T.colors($-colors) {
+        &.is-#{$name} {
             > .page {
                 &:not(.is-disabled).is-active {
                     background: $color;
-                    color: foreground($color);
+                    color: T.foreground($color);
                 }
             }
         }

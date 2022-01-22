@@ -1,0 +1,4 @@
+@use "@bardoui/termeh/termeh.scss" as T;
+@include T.define-color("primary", #5e548e, true);
+@include T.define("font", "family", "calibri");
+@include T.define("font", "size", 13px);

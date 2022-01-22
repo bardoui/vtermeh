@@ -1,5 +1,5 @@
 <template>
-    <div class="pagination">
+    <div class="v-pagination">
         <template v-if="N(total)">
             <div
                 class="page"

@@ -1,18 +1,16 @@
-@import "@bardoui/termeh/scss/core.scss";
-// Setting vars
-@include _var("font", "family", "calibri");
-@include _var("font", "size", 13px);
-@include _color("primary", #2b9348, true);
-// Loading modules
-@import "@bardoui/termeh/scss/reset.scss";
-@import "@bardoui/termeh/scss/component/layout.scss";
-@import "@bardoui/termeh/scss/component/container.scss";
-@import "@bardoui/termeh/scss/component/button.scss";
-@import "@bardoui/termeh/scss/component/flex.scss";
-@import "@bardoui/termeh/scss/component/icon.scss";
-@import "@bardoui/termeh/scss/component/card.scss";
-@import "@bardoui/termeh/scss/component/gaper.scss";
-@import "@bardoui/termeh/scss/component/landscape.scss";
+@use "@bardoui/termeh/termeh.scss" as T;
+@use "./vars.scss";
+@use "@bardoui/termeh/styles.scss";
+@use "@bardoui/termeh/layout/container.scss";
+@use "@bardoui/termeh/layout/layout.scss";
+@use "@bardoui/termeh/layout/grid.scss";
+@use "@bardoui/termeh/layout/gaper.scss";
+@use "@bardoui/termeh/layout/components.scss";
+@use "@bardoui/termeh/components/button.scss";
+@use "@bardoui/termeh/components/icon.scss";
+@use "@bardoui/termeh/components/card.scss";
+@use "@bardoui/termeh/helpers/attachment.scss";
+
 // Components
 @import "@/choose.scss";
 @import "@/pagination.scss";
@@ -23,7 +21,7 @@
     height: 100%;
     margin: 0;
     padding: 1rem;
-    background: _palette("shade", "50");
+    background: T.palette("shade", "50");
 }
 section {
     display: block;
@@ -38,5 +36,5 @@ code {
 }
 
 h3 {
-    color: readable(_color("primary"), _color("base"));
+    color: T.readable(T.color("background"), T.color("primary"), true);
 }
