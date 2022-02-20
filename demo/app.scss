@@ -1,18 +1,14 @@
 @use "@bardoui/termeh/termeh.scss" as T;
 @use "./vars.scss";
-@use "@bardoui/termeh/styles.scss";
-@use "@bardoui/termeh/layout/container.scss";
-@use "@bardoui/termeh/layout/layout.scss";
-@use "@bardoui/termeh/layout/grid.scss";
-@use "@bardoui/termeh/layout/gaper.scss";
-@use "@bardoui/termeh/layout/components.scss";
-@use "@bardoui/termeh/components/button.scss";
-@use "@bardoui/termeh/components/icon.scss";
-@use "@bardoui/termeh/components/card.scss";
-@use "@bardoui/termeh/helpers/attachment.scss";
+@forward "@bardoui/termeh/styles.scss";
+@forward "@bardoui/termeh/layout/all.scss";
+@forward "@bardoui/termeh/form/all.scss";
+@forward "@bardoui/termeh/components/all.scss";
+@forward "@bardoui/termeh/helpers/all.scss";
 
 // Components
 @import "@/choose.scss";
+@import "@/file-upload.scss";
 @import "@/pagination.scss";
 
 // Custom styling

@@ -37,7 +37,8 @@ export default {
         copy({
             targets: [
                 { src: "src/choose.scss", dest: "dist" },
-                { src: "src/pagination.scss", dest: "dist" }
+                { src: "src/pagination.scss", dest: "dist" },
+                { src: "src/file-upload.scss", dest: "dist" }
             ]
         }),
         scss({
