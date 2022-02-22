@@ -34,7 +34,7 @@ defineExpose({ clear });
 
 // stats
 const files = ref<FileList | null>(null);
-const fInput = ref<HTMLInputElement>();
+const fInput = ref();
 
 // computed
 const id = computed(() => generate());

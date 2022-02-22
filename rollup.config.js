@@ -50,5 +50,5 @@ export default {
         VuePlugin(),
         commonjs()
     ],
-    external: ["vue"]
+    external: ["vue", "shortid"]
 };
