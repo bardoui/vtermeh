@@ -10,6 +10,7 @@
         </slot>
         <input
             :id="id"
+            ref="fInput"
             type="file"
             :multiple="multiple"
             :accept="accept"
@@ -20,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, computed, ref } from "vue";
+import { defineProps, defineEmits, defineExpose, computed, ref } from "vue";
 import { generate } from "shortid";
 // Props and emits
 const emits = defineEmits(["select"]);
@@ -29,9 +30,11 @@ const props = defineProps({
     accept: String,
     icons: Object
 });
+defineExpose({ clear });
 
 // stats
 const files = ref<FileList | null>(null);
+const fInput = ref<HTMLInputElement>();
 
 // computed
 const id = computed(() => generate());
@@ -79,5 +82,11 @@ function handleChange($e: Event) {
         files.value = target.files;
     }
     emits("select", files.value);
+}
+
+function clear() {
+    files.value = null;
+    fInput.value && (fInput.value.value = "");
+    emits("select", null);
 }
 </script>

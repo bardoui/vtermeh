@@ -99,6 +99,8 @@ import { vField } from "@bardoui/vtermeh";
 
 File upload with preview. You can get selected files from `@select` event.
 
+**Note:** You can call `clear` inner method to clear input (e.g. `refVar.value.clear()`);
+
 ```vue
 <template>
   <vFileUpload

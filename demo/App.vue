@@ -170,10 +170,21 @@
                                         class="header is-left-decorated is-primary"
                                     >
                                         <h3>File Upload</h3>
+                                        <div>
+                                            <div class="gaper is-auto">
+                                                <div
+                                                    class="meta is-action"
+                                                    @click="doClear"
+                                                >
+                                                    Clear
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="section">
                                     <vFileUpload
+                                        ref="fileUP"
                                         :multiple="true"
                                         accept="image-*"
                                         @select="log"
@@ -197,6 +208,8 @@ import { vChoose, vField, vFileUpload, vPagination } from "@/vTermeh";
 
 const items = ref(["none", "primary", "error", "disabled", "empty"]);
 const item = ref("");
+const fileUP = ref();
+
 const mapper = (item: string) => {
     switch (item) {
         case "none":
@@ -244,7 +257,10 @@ const messages = computed(() => {
     return {};
 });
 
-const log = v => console.log(v);
+const log = (v: unknown) => console.log(v);
+const doClear = () => {
+    fileUP.value && fileUP.value.clear();
+};
 </script>
 
 <style lang="scss">

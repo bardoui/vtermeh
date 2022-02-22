@@ -1,6 +1,6 @@
 {
     "name": "@bardoui/vtermeh",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "private": false,
     "description": "termeh component for vue 3",
     "license": "ISC",
@@ -34,7 +34,7 @@
         "url": "https://github.com/bardoui/vtermeh"
     },
     "dependencies": {
-        "@bardoui/termeh": "^3.0.0-rc.3",
+        "@bardoui/termeh": "^3.0.0-rc.4",
         "@bardoui/vutils": "^1.1.0",
         "core-js": "^3.6.5",
         "shortid": "^2.2.16",
