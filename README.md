@@ -53,9 +53,12 @@ Choose component have following classes:
 - **is-stacked**: set choose direction as vertical.
 - **is-{device}-stacked**: set choose direction as vertical for device.
 - **is-{color}**: set choose color to registered iterable colors.
+- **is-{gap}-gaped**: set choose container padding to gap.
+- **is-{gap}-padded**: set choose item padding to gap.
 
 | variable | description                                             | default |
 | :------- | :------------------------------------------------------ | :------ |
+| gaps     | list of non-iterable gaps to include in choose gaps     | `()`    |
 | colors   | list of non-iterable colors to include in choose colors | `()`    |
 
 ## Field

@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "@bardoui/termeh/termeh.scss" as T;
 
+$-gaps: T.var("choose", "gaps", ());
 $-colors: T.var("choose", "colors", ());
 $-background: T.color("background");
 $-foreground: T.color("foreground");
@@ -20,7 +21,6 @@ $-decorator: T.var("decorator", "size", 2px);
     > .item {
         display: block;
         flex: 1 1 auto;
-        line-height: 1;
         cursor: pointer;
         text-align: center;
         box-sizing: border-box;
@@ -58,6 +58,15 @@ $-decorator: T.var("decorator", "size", 2px);
     &.is-stacked {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    @each $name, $gap in T.gaps($-gaps) {
+        &.is-#{$name}-gaped {
+            padding: T.el-pad($gap);
+        }
+        &.is-#{$name}-padded > .item {
+            padding: T.el-pad($gap);
+        }
     }
 
     @each $name, $color in T.colors($-colors) {
