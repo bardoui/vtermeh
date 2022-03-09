@@ -8,6 +8,7 @@
 
 // Components
 @import "@/choose.scss";
+@import "@/dropdown.scss";
 @import "@/file-upload.scss";
 @import "@/pagination.scss";
 
@@ -17,7 +18,7 @@
     height: 100%;
     margin: 0;
     padding: 1rem;
-    background: T.palette("shade", "50");
+    background: T.variant("base", "separator");
 }
 section {
     display: block;
@@ -32,5 +33,5 @@ code {
 }
 
 h3 {
-    color: T.readable(T.color("background"), T.color("primary"), true);
+    color: T.variant("primary", "readable");
 }

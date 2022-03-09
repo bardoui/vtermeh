@@ -1,8 +1,8 @@
 <template>
     <div class="layout">
         <div class="attachment">
-            <div class="container is-padding-less">
-                <h2 class="is-shade-colored is-margin-less">
+            <div class="container is-paddingless">
+                <h2 class="is-shade-colored is-marginless">
                     Termeh Based Component For Vue 3
                 </h2>
             </div>
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="section">
+                                <div class="section is-secondary">
                                     <h5>Normal</h5>
                                     <vPagination
                                         :count="5"
@@ -98,7 +98,7 @@
                                         No Records
                                     </vPagination>
                                 </div>
-                                <div class="section is-secondary">
+                                <div class="section">
                                     <h5>Flat (no background)</h5>
                                     <vPagination
                                         :count="5"
@@ -196,6 +196,7 @@
                                 </div>
                             </div>
                         </div>
+                            <Dropdown />
                     </div>
                 </div>
             </div>
@@ -205,6 +206,7 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { vChoose, vField, vFileUpload, vPagination } from "@/vTermeh";
+import Dropdown from "./dropdown.vue";
 
 const items = ref(["none", "primary", "error", "disabled", "empty"]);
 const item = ref("");
@@ -213,7 +215,7 @@ const fileUP = ref();
 const mapper = (item: string) => {
     switch (item) {
         case "none":
-            return "Simple";
+            return "Success";
         case "primary":
             return "Primary";
         case "error":
@@ -230,6 +232,7 @@ const page = ref(0);
 
 const classes = computed(() => {
     const cls: Record<string, boolean> = {};
+    if (item.value == "none") cls["is-success"] = true;
     if (item.value == "primary") cls["is-primary"] = true;
     if (item.value == "error") cls["is-error"] = true;
     if (item.value == "disabled") cls["is-disabled"] = true;

@@ -1,0 +1,206 @@
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+
+.v-dropdown {
+    $-decorator: T.var("decorator", "size");
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    padding: T.control-padding();
+    background-color: T.color("input");
+    border-radius: T.var("radius", "normal");
+    border: 1px solid
+        T.variant("input", "border", T.variant("base", "separator"));
+
+    > .vdp-container {
+        flex: 1 1 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        box-sizing: border-box;
+
+        > input {
+            @include T.control();
+            display: block;
+            flex: 1 1 5em;
+            border-radius: 0;
+
+            @include T.placeholder {
+                color: T.variant(
+                    "input",
+                    "placeholder",
+                    T.variant("shade", "mute")
+                );
+            }
+        }
+    }
+
+    > .vdp-gap {
+        width: T.gap("micro");
+    }
+
+    > .vdp-arrow {
+        flex: 0 0 auto;
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        > .arrow {
+            display: inline-block;
+            border: 0 solid currentColor;
+            border-width: 0 $-decorator $-decorator 0;
+            padding: $-decorator;
+            transform: rotate(45deg);
+            @include T.transition(all);
+        }
+    }
+
+    > .vdp-menu {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        left: 0;
+        right: 0;
+        top: 100%;
+        opacity: 0;
+        max-height: 0;
+        margin: 0 -1px -1px;
+        overflow: hidden;
+        background-color: T.color("input");
+        border: 0 solid T.color("primary");
+        border-radius: T.var("radius", "normal");
+        @include T.scrollable(T.color("primary"));
+        @include T.transition(all);
+        @include T.unselectable();
+
+        .item {
+            display: block;
+            padding: T.control-padding();
+
+            &:hover,
+            &.is-active {
+                color: T.variant("primary", "readable");
+                background: T.variant("primary", "light");
+            }
+
+            &.is-selected {
+                font-weight: bold;
+            }
+        }
+    }
+
+    &.is-active {
+        border-color: T.color("primary");
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-width: 0;
+
+        > .vdp-arrow > .arrow {
+            transform: rotate(-135deg);
+            color: T.variant("primary", "readable");
+        }
+
+        > .vdp-menu {
+            opacity: 1;
+            overflow-y: auto;
+            max-height: T.var("dropdown", "height", 15rem);
+            z-index: T.var("dropdown", "z-index", 999);
+            backface-visibility: hidden;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-width: 1px;
+            border-top-color: T.variant(
+                "input",
+                "border",
+                T.variant("base", "separator")
+            );
+        }
+    }
+
+    &:not(.is-empty) {
+        > .vdp-container {
+            margin: T.negate(math.div(T.gap("micro"), 2));
+
+            > * {
+                margin: math.div(T.gap("micro"), 2) !important;
+            }
+
+            input {
+                color: T.variant(
+                    "input",
+                    "placeholder",
+                    T.variant("shade", "mute")
+                );
+            }
+        }
+    }
+
+    @each $name, $color in T.colors(T.var("input", "colors", ())) {
+        &.is-#{$name} {
+            > .vdp-menu {
+                border-color: $color;
+                @include T.scroll-color($color);
+
+                .item {
+                    &:hover,
+                    &.is-active {
+                        color: T.variant($name, "readable");
+                        background: T.variant($name, "light");
+                    }
+                }
+            }
+
+            &.is-active {
+                border-color: $color;
+                > .vdp-arrow > .arrow {
+                    color: T.variant($name, "readable");
+                }
+
+                > .vdp-menu {
+                    border-top-color: T.variant(
+                        "input",
+                        "border",
+                        T.variant("base", "separator")
+                    );
+                }
+            }
+        }
+    }
+
+    &.is-failed {
+        > .vdp-menu {
+            border-color: T.color("error");
+            @include T.scroll-color(T.color("error"));
+        }
+
+        &.is-active {
+            border-color: T.color("error");
+            > .vdp-arrow > .arrow {
+                color: T.variant("error", "readable");
+            }
+
+            > .vdp-menu {
+                border-top-color: T.variant(
+                    "input",
+                    "border",
+                    T.variant("base", "separator")
+                );
+            }
+        }
+    }
+
+    fieldset[disabled] &,
+    &.is-disabled {
+        @include T.disabled();
+        > .vdp-menu {
+            display: none !important;
+        }
+    }
+}

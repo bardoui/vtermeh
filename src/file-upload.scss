@@ -2,19 +2,15 @@
 @use "@bardoui/termeh/termeh.scss" as T;
 @forward "@bardoui/termeh/form/input.scss";
 
-$-gaps: T.var("input", "gaps", ());
-$-width: T.var("file-upload", "width", 4em);
-$-height: T.var("file-upload", "height", 4em);
-
 .v-file-upload {
     @include T.unselectable();
-    padding: T.gap("element");
+    padding: T.gap("micro") * 2;
     position: relative;
 
     .v-file-thumbnails {
         display: flex;
-        width: $-width + 1em;
-        height: $-height;
+        width: T.var("file-upload", "width", 4em) + 1em;
+        height: T.var("file-upload", "height", 4em);
         position: relative;
         cursor: help;
         align-items: center;
@@ -22,14 +18,14 @@ $-height: T.var("file-upload", "height", 4em);
         z-index: 0;
 
         > img {
-            width: $-width;
-            height: $-height;
+            width: T.var("file-upload", "width", 4em);
+            height: T.var("file-upload", "height", 4em);
             object-fit: cover;
             position: absolute;
 
             &:nth-child(1) {
                 z-index: 3;
-                height: $-height;
+                height: T.var("file-upload", "height", 4em);
                 @include T.ltr() {
                     right: 1em;
                 }
@@ -40,7 +36,7 @@ $-height: T.var("file-upload", "height", 4em);
 
             &:nth-child(2) {
                 z-index: 2;
-                height: $-height - 0.5em;
+                height: T.var("file-upload", "height", 4em) - 0.5em;
                 opacity: 0.75;
                 @include T.ltr() {
                     right: 0.5em;
@@ -52,7 +48,7 @@ $-height: T.var("file-upload", "height", 4em);
 
             &:nth-child(3) {
                 z-index: 1;
-                height: $-height - 1em;
+                height: T.var("file-upload", "height", 4em) - 1em;
                 opacity: 0.5;
                 @include T.ltr() {
                     right: 0;
@@ -66,13 +62,14 @@ $-height: T.var("file-upload", "height", 4em);
 
     > label {
         position: absolute;
+        opacity: T.var("file-upload", "opacity", 0.1);
         left: 0;
         right: 0;
         top: 0;
         bottom: 0;
         cursor: pointer;
         z-index: 4;
-        transition: all T.transition-params();
+        @include T.transition(all);
     }
 
     > input {
@@ -86,13 +83,7 @@ $-height: T.var("file-upload", "height", 4em);
 
     &:hover {
         > label {
-            background: rgba(T.color("separator"), 0.2);
-        }
-    }
-
-    @each $name, $gap in T.gaps($-gaps) {
-        &.is-#{$name}-padded {
-            padding: $gap;
+            background: T.color("shade");
         }
     }
 }

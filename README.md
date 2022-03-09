@@ -27,7 +27,7 @@ Choose component. You can set default slot to change default item template.
 ```vue
 <template>
   <vChoose :items="items" v-model="item">
-    <template #default="{ item }">
+    <template #default="{ item, failed, disabled }">
       {{ item == "first" ? "1th" : item == "second" ? "2th" : item }}
     </template>
   </vChoose>
@@ -43,23 +43,69 @@ const item = ref("");
 </style>
 ```
 
-| Property | Type            | Description   |
-| :------- | :-------------- | :------------ |
-| items    | `Array<string>` | List of items |
+| Property | Type            | Description          |
+| :------- | :-------------- | :------------------- |
+| items    | `Array<string>` | List of items        |
+| disabled | Boolean         | disabled state       |
+| failed   | Boolean         | failed state (error) |
 
 Choose component have following classes:
 
-- **is-disabled**: disable choose component.
 - **is-stacked**: set choose direction as vertical.
 - **is-{device}-stacked**: set choose direction as vertical for device.
+- **is-{size}**: set choose size to size.
 - **is-{color}**: set choose color to registered iterable colors.
-- **is-{gap}-gaped**: set choose container padding to gap.
-- **is-{gap}-padded**: set choose item padding to gap.
 
-| variable | description                                             | default |
-| :------- | :------------------------------------------------------ | :------ |
-| gaps     | list of non-iterable gaps to include in choose gaps     | `()`    |
-| colors   | list of non-iterable colors to include in choose colors | `()`    |
+| variable | description                                           | default |
+| :------- | :---------------------------------------------------- | :------ |
+| sizes    | list of non-iterable sizes to include in choose sizes | `()`    |
+
+## Dropdown
+
+Dropdown component.
+
+```vue
+<template>
+  <vDropdown :items="items" v-model="item" v-model:searchValue="search">
+    <template #icon="{ isEmpty, isOpen, isFiltered, failed, disabled}">
+      Icon
+    </template>
+    <template #selected="{ item, failed, disabled}">
+      Single item
+    </template>
+    <template #selected="{ item, remove, failed, disabled}">
+      Multi Select items
+    </template>
+    <template #menu="{ isEmpty, isOpen, isFiltered, failed, disabled}">
+      <div class="item" v-if="isFiltered">Add new</div>
+    </template>
+    <template #default="{ id, selected, active, failed, disabled, item }">
+      Menu Item
+    </template>
+  </vDropdown>
+</template>
+<script lang="ts" setup>
+import { vDropdown } from "@bardoui/vtermeh";
+const items = ref([{...}, {...}]);
+const item = ref();
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/dropdown.scss";
+</style>
+```
+
+| Property    | Type              | Description                                             |
+| :---------- | :---------------- | :------------------------------------------------------ |
+| search      | Boolean           | allow search                                            |
+| multiple    | Boolean           | allow multiple selection                                |
+| disabled    | Boolean           | disabled state                                          |
+| failed      | Boolean           | failed state (error)                                    |
+| placeholder | String            | placeholder text                                        |
+| identifier  | String            | id field of item, empty identifier for non-object items |
+| items       | Array             | items list                                              |
+| searchValue | String            | search model value                                      |
+| modelValue  | { required: false | model value                                             |
 
 ## Field
 
@@ -141,6 +187,7 @@ File upload component use default termeh `.input` for styling.
 | :------- | :-------------------- | :------ |
 | width    | thumbnail icon width  | `4em`   |
 | height   | thumbnail icon height | `4em`   |
+| opacity  | hover state opacity   | `0.1`   |
 
 You must use `"file-upload"` as component name for overriding variable in termeh.
 

@@ -9,9 +9,9 @@
     >
         <label :for="id" v-if="label">{{ label }}:</label>
         <slot :id="id" />
-        <p class="meta help" v-if="help">{{ help }}</p>
+        <div class="meta help" v-if="help">{{ help }}</div>
         <template v-for="(e, index) in _errors" :key="index">
-            <p class="error">{{ e }}</p>
+            <div class="error">{{ e }}</div>
         </template>
     </div>
 </template>

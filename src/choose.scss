@@ -1,22 +1,18 @@
 @use "sass:math";
 @use "@bardoui/termeh/termeh.scss" as T;
 
-$-gaps: T.var("choose", "gaps", ());
-$-colors: T.var("choose", "colors", ());
-$-background: T.color("background");
-$-foreground: T.color("foreground");
-$-decorator: T.var("decorator", "size", 2px);
-
 .v-choose {
+    $-gap: math.div(T.var("decorator", "size", 2px), 2);
     display: flex;
     flex-direction: row;
     align-items: center;
     user-select: none;
     box-sizing: border-box;
     background: T.color("input");
-    border: 1px solid T.color("separator");
     border-radius: T.var("radius", "normal");
-    padding: T.el-pad(T.gap("element"));
+    border: 1px solid
+        T.variant("input", "border", T.variant("base", "separator"));
+    padding: T.negate($-gap);
 
     > .item {
         display: block;
@@ -24,34 +20,30 @@ $-decorator: T.var("decorator", "size", 2px);
         cursor: pointer;
         text-align: center;
         box-sizing: border-box;
-        margin: math.div($-decorator, 2);
-        padding: T.el-pad(T.gap("element"));
+        line-height: 1em;
+        margin: $-gap;
+        padding: T.control-padding();
         border-radius: T.var("radius", "normal");
-        transition: all T.transition-params();
+        @include T.transition(all);
 
         &:not(.is-active):hover {
-            $bg: T.muted($-background, T.color("shade"), false);
-            background-color: $bg;
-            color: T.readable($bg, $-foreground);
+            background-color: T.variant("shade", "light");
+            color: T.variant("shade", "readable");
         }
 
         &.is-active {
             background: T.color("shade");
-            color: T.readable(T.color("shade"), $-foreground);
+            color: T.variant("shade", "color");
         }
     }
 
     &.is-disabled {
-        @include T.locked();
-        background: T.disabled($-background) !important;
-        border-color: T.disabled($-background, true) !important;
-        color: T.muted($-background, $-foreground) !important;
+        @include T.disabled();
 
-        > .item {
-            &.is-active {
-                background: T.disabled($-background, true) !important;
-                color: T.muted($-background, $-foreground) !important;
-            }
+        > .item,
+        > .item.is-active {
+            background: none;
+            color: T.variant("input", "disabled-color");
         }
     }
 
@@ -60,20 +52,17 @@ $-decorator: T.var("decorator", "size", 2px);
         align-items: stretch;
     }
 
-    @each $name, $gap in T.gaps($-gaps) {
-        &.is-#{$name}-gaped {
-            padding: T.el-pad($gap);
-        }
-        &.is-#{$name}-padded > .item {
-            padding: T.el-pad($gap);
+    @each $name, $size in T.sizes(T.var("choose", "sizes", ())) {
+        &.is-#{$name} {
+            font-size: $size;
         }
     }
 
-    @each $name, $color in T.colors($-colors) {
+    @each $name, $color in T.colors(T.var("input", "colors", ())) {
         &.is-#{$name} {
             > .item.is-active {
                 background: $color;
-                color: T.foreground($color);
+                color: T.variant($name, "color");
             }
         }
     }
