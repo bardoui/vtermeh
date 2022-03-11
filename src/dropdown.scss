@@ -23,6 +23,11 @@
         flex-wrap: wrap;
         align-items: center;
         box-sizing: border-box;
+        margin: T.negate(math.div(T.gap("micro"), 2));
+
+        > * {
+            margin: math.div(T.gap("micro"), 2) !important;
+        }
 
         > input {
             @include T.control();
@@ -126,12 +131,6 @@
 
     &:not(.is-empty) {
         > .vdp-container {
-            margin: T.negate(math.div(T.gap("micro"), 2));
-
-            > * {
-                margin: math.div(T.gap("micro"), 2) !important;
-            }
-
             input {
                 color: T.variant(
                     "input",
