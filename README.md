@@ -97,19 +97,19 @@ const item = ref();
 
 **Note:** if you return true from key handler function, default dropdown keyboard handler not fired!
 
-| Property    | Type                            | default     | Description                                             |
-| :---------- | :------------------------------ | :---------- | ------------------------------------------------------- |
-| search      | Boolean                         | `false`     | allow search                                            |
-| delete      | Boolean                         | `true`      | allow delete item with `ctrl+backspace`                 |
-| multiple    | Boolean                         | `false`     | allow multiple selection                                |
-| disabled    | Boolean                         | `false`     | disabled state                                          |
-| failed      | Boolean                         | `false`     | failed state (error)                                    |
-| placeholder | String                          | `'Select'`  | placeholder text                                        |
-| identifier  | String                          | `''`        | id field of item, empty identifier for non-object items |
-| items       | Array                           | `[]`        | items list                                              |
-| searchValue | String                          | `''`        | search model value                                      |
-| modelValue  | any                             | `undefined` | model value                                             |
-| keyHandler  | `(e: KeyboardEvent) => boolean` | `undefined` | custom keyboard handler                                 |
+| Property    | Type                                               | default     | Description                                             |
+| :---------- | :------------------------------------------------- | :---------- | ------------------------------------------------------- |
+| search      | Boolean                                            | `false`     | allow search                                            |
+| delete      | Boolean                                            | `true`      | allow delete item with `ctrl+backspace`                 |
+| multiple    | Boolean                                            | `false`     | allow multiple selection                                |
+| disabled    | Boolean                                            | `false`     | disabled state                                          |
+| failed      | Boolean                                            | `false`     | failed state (error)                                    |
+| placeholder | String                                             | `'Select'`  | placeholder text                                        |
+| identifier  | String                                             | `''`        | id field of item, empty identifier for non-object items |
+| items       | Array                                              | `[]`        | items list                                              |
+| searchValue | String                                             | `''`        | search model value                                      |
+| modelValue  | any                                                | `undefined` | model value                                             |
+| keyHandler  | `(e: KeyboardEvent, selected: unknown) => boolean` | `undefined` | custom keyboard handler                                 |
 
 ## Field
 

@@ -179,7 +179,7 @@ const onFocus = () => {
 
 function onKeydown(e: KeyboardEvent) {
     if (isOpen.value) {
-        if (props.keyHandler && props.keyHandler(e) == true) {
+        if (props.keyHandler && props.keyHandler(e, selected.value) == true) {
             return;
         }
         switch (e.key) {
