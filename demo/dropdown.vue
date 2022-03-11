@@ -50,6 +50,8 @@
                     :search="true"
                     :failed="true"
                     :items="items"
+                    :delete="false"
+                    :key-handler="handler"
                     identifier="_id"
                     v-model="model"
                     v-model:searchValue="search"
@@ -163,4 +165,10 @@ const doClear = () => {
     model.value = null;
     modelM.value = null;
 };
+
+function handler(e: KeyboardEvent, add: any, remove: any) {
+    if (e.ctrlKey && e.key == "Delete") {
+        console.log("Hii");
+    }
+}
 </script>

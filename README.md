@@ -95,17 +95,19 @@ const item = ref();
 </style>
 ```
 
-| Property    | Type              | Description                                             |
-| :---------- | :---------------- | :------------------------------------------------------ |
-| search      | Boolean           | allow search                                            |
-| multiple    | Boolean           | allow multiple selection                                |
-| disabled    | Boolean           | disabled state                                          |
-| failed      | Boolean           | failed state (error)                                    |
-| placeholder | String            | placeholder text                                        |
-| identifier  | String            | id field of item, empty identifier for non-object items |
-| items       | Array             | items list                                              |
-| searchValue | String            | search model value                                      |
-| modelValue  | { required: false | model value                                             |
+| Property    | Type                                            | default     | Description                                             |
+| :---------- | :---------------------------------------------- | :---------- | ------------------------------------------------------- |
+| search      | Boolean                                         | `false`     | allow search                                            |
+| delete      | Boolean                                         | `true`      | allow delete item with `ctrl+backspace`                 |
+| multiple    | Boolean                                         | `false`     | allow multiple selection                                |
+| disabled    | Boolean                                         | `false`     | disabled state                                          |
+| failed      | Boolean                                         | `false`     | failed state (error)                                    |
+| placeholder | String                                          | `'Select'`  | placeholder text                                        |
+| identifier  | String                                          | `''`        | id field of item, empty identifier for non-object items |
+| items       | Array                                           | `[]`        | items list                                              |
+| searchValue | String                                          | `''`        | search model value                                      |
+| modelValue  | any                                             | `undefined` | model value                                             |
+| keyHandler  | (e: KeyboardEvent, add: (item), remove: (item)) | `undefined` | model value                                             |
 
 ## Field
 

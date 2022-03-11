@@ -93,6 +93,7 @@ import {
 const emits = defineEmits(["update:modelValue", "update:searchValue"]);
 const props = defineProps({
     search: { type: Boolean, default: false },
+    delete: { type: Boolean, default: true },
     multiple: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     failed: { type: Boolean, default: false },
@@ -100,7 +101,8 @@ const props = defineProps({
     identifier: { type: String, default: "" },
     items: { type: Array, default: () => [] },
     searchValue: { type: String, default: "" },
-    modelValue: { required: true }
+    modelValue: { required: true },
+    keyHandler: Function
 });
 
 // stats
@@ -153,7 +155,7 @@ const dClass = computed(() => ({
 }));
 
 // handlers
-function onClick(e: MouseEvent) {
+function onClick(e: MouseEvent) {   
     if (el.value && e.target) {
         if (el.value.contains(e.target as HTMLElement)) {
             clicked.value = true;
@@ -205,7 +207,7 @@ function onKeydown(e: KeyboardEvent) {
                 }
                 break;
             case "Backspace":
-                if (e.ctrlKey) {
+                if (e.ctrlKey && props.delete) {
                     Array.isArray(model.value)
                         ? model.value.length &&
                           remove(model.value[model.value.length - 1])
@@ -237,6 +239,9 @@ function onKeydown(e: KeyboardEvent) {
                 });
                 break;
         }
+        if (props.keyHandler) {
+            props.keyHandler(e, add, remove);
+        }
     }
 }
 
@@ -248,8 +253,10 @@ function add(item: unknown) {
         emits("update:modelValue", v);
     } else {
         emits("update:modelValue", item);
-        clicked.value = false;
-        elI.value && elI.value.blur();
+        setTimeout(() => {
+            clicked.value = false;
+            elI.value && elI.value.blur();
+        });
     }
 }
 
