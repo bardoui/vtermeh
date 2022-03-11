@@ -166,9 +166,11 @@ const doClear = () => {
     modelM.value = null;
 };
 
-function handler(e: KeyboardEvent, add: any, remove: any) {
-    if (e.ctrlKey && e.key == "Delete") {
-        console.log("Hii");
+function handler(e: KeyboardEvent): boolean {
+    if (e.key == "Enter") {
+        console.log("Enter called");
+        return true;
     }
+    return false;
 }
 </script>

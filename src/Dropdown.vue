@@ -155,7 +155,7 @@ const dClass = computed(() => ({
 }));
 
 // handlers
-function onClick(e: MouseEvent) {   
+function onClick(e: MouseEvent) {
     if (el.value && e.target) {
         if (el.value.contains(e.target as HTMLElement)) {
             clicked.value = true;
@@ -179,6 +179,9 @@ const onFocus = () => {
 
 function onKeydown(e: KeyboardEvent) {
     if (isOpen.value) {
+        if (props.keyHandler && props.keyHandler(e) == true) {
+            return;
+        }
         switch (e.key) {
             case "ArrowUp":
                 if (_items.value.length) {
@@ -238,9 +241,6 @@ function onKeydown(e: KeyboardEvent) {
                     emits("update:searchValue", "");
                 });
                 break;
-        }
-        if (props.keyHandler) {
-            props.keyHandler(e, add, remove);
         }
     }
 }
