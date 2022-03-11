@@ -94,6 +94,7 @@ const emits = defineEmits(["update:modelValue", "update:searchValue"]);
 const props = defineProps({
     search: { type: Boolean, default: false },
     delete: { type: Boolean, default: true },
+    autoClose: { type: Boolean, default: true },
     multiple: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     failed: { type: Boolean, default: false },
@@ -253,10 +254,12 @@ function add(item: unknown) {
         emits("update:modelValue", v);
     } else {
         emits("update:modelValue", item);
-        setTimeout(() => {
-            clicked.value = false;
-            elI.value && elI.value.blur();
-        });
+        if (props.autoClose) {
+            setTimeout(() => {
+                clicked.value = false;
+                elI.value && elI.value.blur();
+            });
+        }
     }
 }
 

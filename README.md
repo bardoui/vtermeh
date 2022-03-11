@@ -101,6 +101,7 @@ const item = ref();
 | :---------- | :------------------------------------------------- | :---------- | ------------------------------------------------------- |
 | search      | Boolean                                            | `false`     | allow search                                            |
 | delete      | Boolean                                            | `true`      | allow delete item with `ctrl+backspace`                 |
+| autoClose   | Boolean                                            | `true`      | close dropdown after select on single mode              |
 | multiple    | Boolean                                            | `false`     | allow multiple selection                                |
 | disabled    | Boolean                                            | `false`     | disabled state                                          |
 | failed      | Boolean                                            | `false`     | failed state (error)                                    |
