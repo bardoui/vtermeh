@@ -15,7 +15,9 @@
                     :item="model"
                     :failed="failed"
                     :disabled="disabled"
-                />
+                >
+                    <div>{{ item }}</div>
+                </slot>
             </template>
             <template v-else>
                 <template v-for="item in model" :key="getId(item)">
