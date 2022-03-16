@@ -16,7 +16,7 @@
                     :failed="failed"
                     :disabled="disabled"
                 >
-                    <div>{{ item }}</div>
+                    <div>{{ model }}</div>
                 </slot>
             </template>
             <template v-else>
