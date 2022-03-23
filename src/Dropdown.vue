@@ -234,6 +234,7 @@ function onKeydown(e: KeyboardEvent) {
                                     idx = _items.value.length - 1;
                                 }
                                 selected.value = _items.value[idx];
+                                e.preventDefault();
                             }
                         });
                     }
