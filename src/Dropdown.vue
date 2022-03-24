@@ -35,10 +35,10 @@
             <input
                 ref="elI"
                 type="text"
-                :placeholder="_placeholder"
                 v-model="_search"
-                @keydown.esc="_search = ''"
                 :disabled="!search"
+                :placeholder="_placeholder"
+                @keydown.enter.stop="ignoreHandler"
             />
         </div>
         <div class="vdp-gap"></div>
@@ -158,6 +158,9 @@ const dClass = computed(() => ({
 }));
 
 // handlers
+function ignoreHandler() {
+    return false;
+}
 function onClick(e: MouseEvent) {
     if (el.value && e.target) {
         if (el.value.contains(e.target as HTMLElement)) {
