@@ -198,6 +198,7 @@ function onKeydown(e: KeyboardEvent) {
                     }
                     selected.value = _items.value[i];
                 }
+                e.stopPropagation();
                 break;
             case "ArrowDown":
                 if (_items.value.length) {
@@ -211,6 +212,7 @@ function onKeydown(e: KeyboardEvent) {
                     }
                     selected.value = _items.value[i];
                 }
+                e.stopPropagation();
                 break;
             case "Backspace":
                 if (e.ctrlKey && props.delete) {
@@ -218,6 +220,7 @@ function onKeydown(e: KeyboardEvent) {
                         ? model.value.length &&
                           remove(model.value[model.value.length - 1])
                         : emits("update:modelValue", null);
+                    e.stopPropagation();
                 }
                 break;
             case "Enter":
@@ -234,7 +237,7 @@ function onKeydown(e: KeyboardEvent) {
                                     idx = _items.value.length - 1;
                                 }
                                 selected.value = _items.value[idx];
-                                e.preventDefault();
+                                e.stopPropagation();
                             }
                         });
                     }
@@ -244,6 +247,7 @@ function onKeydown(e: KeyboardEvent) {
                 setTimeout(() => {
                     emits("update:searchValue", "");
                 });
+                e.stopPropagation();
                 break;
         }
     }
