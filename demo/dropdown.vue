@@ -1,6 +1,6 @@
 <template>
     <div class="column is-half is-mobile-full">
-        <div class="card">
+        <form action="Some.php" method="post" class="card">
             <div></div>
             <div class="section is-attached">
                 <div class="header is-left-decorated is-primary">
@@ -68,10 +68,13 @@
                     </template>
                 </vDropdown>
             </div>
-        </div>
+            <div>
+                <input type="submit" value="Submit">
+            </div>
+        </form>
     </div>
     <div class="column is-half is-mobile-full">
-        <div class="card">
+        <form action="Some.php" class="card">
             <div></div>
             <div class="section is-attached">
                 <div class="header is-left-decorated is-primary">
@@ -129,7 +132,7 @@
                     </template>
                 </vDropdown>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
@@ -169,7 +172,7 @@ const doClear = () => {
 function handler(e: KeyboardEvent): boolean {
     if (e.key == "Enter") {
         console.log("Enter called");
-        return true;
+        // return true;
     }
     return false;
 }
