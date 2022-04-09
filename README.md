@@ -163,6 +163,9 @@ File upload with preview. You can get selected files from `@select` event.
     :icons="{ '.*/x-zip.*': 'zip.png', '*': 'default.png' }"
     @select="log_file_list"
   >
+    <template #thumbnails>
+      <img src="default thumb.jpg" />
+    </template>
     <template v-slot="{ count }">
       <div v-if="count == 0">Please select image</div>
       <div v-else>{{ count }} Image</div>

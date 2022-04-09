@@ -189,6 +189,11 @@
                                         accept="image-*"
                                         @select="log"
                                     >
+                                        <template #thumbnails>
+                                            <img />
+                                            <img />
+                                            <img />
+                                        </template>
                                         <template v-slot="{ count }">
                                             <strong>{{ count }} </strong>Doc
                                         </template>
@@ -196,7 +201,7 @@
                                 </div>
                             </div>
                         </div>
-                            <Dropdown />
+                        <Dropdown />
                     </div>
                 </div>
             </div>

@@ -3,6 +3,12 @@
         <div class="v-file-thumbnails" v-if="thumbnails.length > 0">
             <img v-for="(src, i) in thumbnails" :src="src" :key="i" />
         </div>
+        <div
+            class="v-file-thumbnails"
+            v-if="thumbnails.length == 0 && hasThumbnails"
+        >
+            <slot name="thumbnails" />
+        </div>
         <div class="gutter"></div>
         <slot :id="id" :count="count" :files="files">
             <span v-if="count == 0">Select File</span>
@@ -21,9 +27,17 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, defineExpose, computed, ref } from "vue";
+import {
+    defineProps,
+    defineEmits,
+    defineExpose,
+    computed,
+    ref,
+    useSlots
+} from "vue";
 import { generate } from "shortid";
 // Props and emits
+const slots = useSlots();
 const emits = defineEmits(["select"]);
 const props = defineProps({
     multiple: Boolean,
@@ -39,6 +53,7 @@ const fInput = ref();
 // computed
 const id = computed(() => generate());
 const count = computed(() => (files.value ? files.value.length : 0));
+const hasThumbnails = computed(() => !!slots["thumbnails"]);
 const thumbnails = computed(() => {
     const res = [];
     if (files.value && files.value.length) {
