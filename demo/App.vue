@@ -202,6 +202,22 @@
                             </div>
                         </div>
                         <Dropdown />
+                        <div class="column is-half is-mobile-full">
+                            <div class="card">
+                                <div class="field">
+                                    <vToggle v-model="toggleA">Reporting Service</vToggle>
+                                </div>
+                                <div class="field">
+                                    <vToggle v-model="toggleB" class="is-rounded" />
+                                </div>
+                                <div class="field">
+                                    <vToggle v-model="toggleA" :disabled="true"/>
+                                </div>
+                                <div>
+                                    <vToggle v-model="toggleB" :disabled="true" class="is-rounded" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -210,12 +226,14 @@
 </template>
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import { vChoose, vField, vFileUpload, vPagination } from "@/vTermeh";
+import { vChoose, vField, vFileUpload, vPagination, vToggle } from "@/vTermeh";
 import Dropdown from "./dropdown.vue";
 
 const items = ref(["none", "primary", "error", "disabled", "empty"]);
 const item = ref("");
 const fileUP = ref();
+const toggleA = ref(false);
+const toggleB = ref(true);
 
 const mapper = (item: string) => {
     switch (item) {

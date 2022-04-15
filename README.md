@@ -234,3 +234,36 @@ pagination component have following classes:
 | variable | description                                                 | default |
 | :------- | :---------------------------------------------------------- | :------ |
 | colors   | list of non-iterable colors to include in pagination colors | `()`    |
+
+## Toggle
+
+Toggle component. You can fill default slot to change label content.
+
+```vue
+<template>
+  <vToggle :disabled="false" v-model="isEnabled">
+    Reporting Service
+  </vToggle>
+</template>
+<script lang="ts" setup>
+import { vToggle } from "@bardoui/vtermeh";
+const isEnabled = ref(true);
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/toggle.scss";
+</style>
+```
+
+| Property | Type      | Description            |
+| :------- | :-------- | :--------------------- |
+| disabled | `boolean` | disable toggle control |
+
+pagination component have following classes:
+
+- **is-rounded**: make page buttons corner round.
+- **is-{color}**: set toggle color to registered iterable colors.
+
+| variable | description                                             | default |
+| :------- | :------------------------------------------------------ | :------ |
+| colors   | list of non-iterable colors to include in toggle colors | `()`    |

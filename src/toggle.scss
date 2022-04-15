@@ -1,0 +1,112 @@
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+
+.v-toggle {
+    input[type="checkbox"] {
+        height: 0;
+        width: 0;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    display: flex !important;
+    align-items: center;
+    box-sizing: border-box;
+    @include T.unselectable();
+
+    > .v-toggle-label {
+        flex: 1 1 0;
+    }
+
+    > .v-toggle-slider {
+        display: block;
+        box-sizing: content-box;
+        position: relative;
+        cursor: pointer;
+        width: 5em;
+        height: 2em;
+        border: T.var("decorator", "size") solid T.variant("base", "separator");
+        background: T.variant("base", "separator");
+        border-radius: T.var("radius", "normal");
+        @include T.transition(all);
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            @include T.ltr() {
+                left: 0;
+            }
+            @include T.rtl() {
+                right: 0;
+            }
+            width: 2em;
+            height: 2em;
+            background: T.color("base");
+            border-radius: T.var("radius", "normal");
+            box-shadow: T.shadow(1px, 1px, T.color("shade"), false);
+            @include T.transition(all);
+        }
+    }
+
+    &:active {
+        > .v-toggle-slider::after {
+            width: 3em;
+        }
+    }
+
+    &.is-rounded {
+        > .v-toggle-slider {
+            border-radius: T.var("radius", "rounded");
+            &:after {
+                border-radius: T.var("radius", "rounded");
+            }
+        }
+    }
+
+    &.is-checked {
+        > .v-toggle-slider {
+            background: T.color("primary");
+            border-color: T.color("primary");
+            &::after {
+                color: T.variant("primary", "color");
+                transform: translateX(100%);
+                @include T.ltr() {
+                    left: 100%;
+                    transform: translateX(-100%);
+                }
+                @include T.rtl() {
+                    right: 100%;
+                    transform: translateX(100%);
+                }
+            }
+        }
+    }
+
+    @each $name, $color in T.colors(T.var("toggle", "colors", ())) {
+        &.is-#{$name} {
+            &.is-checked {
+                > .v-toggle-slider {
+                    background: $color;
+                    border-color: $color;
+                    &::after {
+                        color: T.variant($name, "color");
+                    }
+                }
+            }
+        }
+    }
+
+    &.is-disabled {
+        > .v-toggle-slider {
+            @include T.disabled();
+            opacity: 0.5;
+            background: T.variant("base", "separator");
+            border-color: T.variant("base", "separator");
+            &::after {
+                background: T.color("base");
+            }
+        }
+    }
+}
