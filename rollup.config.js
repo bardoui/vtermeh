@@ -39,6 +39,7 @@ export default {
                 { src: "src/choose.scss", dest: "dist" },
                 { src: "src/dropdown.scss", dest: "dist" },
                 { src: "src/file-upload.scss", dest: "dist" },
+                { src: "src/options.scss", dest: "dist" },
                 { src: "src/pagination.scss", dest: "dist" },
                 { src: "src/toggle.scss", dest: "dist" }
             ]

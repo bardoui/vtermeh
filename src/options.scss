@@ -1,0 +1,73 @@
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+
+.v-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    user-select: none;
+    box-sizing: border-box;
+
+    > .item {
+        display: block;
+        flex: 1 1 0;
+        cursor: pointer;
+        text-align: center;
+        box-sizing: border-box;
+        white-space: nowrap;
+        line-height: 1em;
+        padding: T.control-padding();
+        border-radius: T.var("radius", "normal");
+        @include T.transition(all);
+
+        &:not(.is-active) {
+            border: T.var("decorator", "size") solid
+                T.variant("base", "separator");
+            &:hover {
+                border-color: T.variant("shade", "light");
+                background-color: T.variant("shade", "light");
+                color: T.variant("shade", "readable");
+            }
+        }
+
+        &.is-active {
+            border-color: T.color("shade");
+            background-color: T.color("shade");
+            color: T.variant("shade", "color");
+        }
+    }
+
+    &:not(.is-gapless) {
+        margin: T.negate(math.div(T.gap("micro"), 2));
+        > .item {
+            margin: math.div(T.gap("micro"), 2);
+        }
+
+        @each $name, $gap in T.gaps(T.var("options", "gaps", ())) {
+            &.is-#{$name}-gaped {
+                margin: T.negate(math.div($gap, 2));
+                > .item {
+                    margin: math.div($gap, 2);
+                }
+            }
+        }
+    }
+
+    @each $name, $color in T.colors(T.var("input", "colors", ())) {
+        &.is-#{$name} {
+            > .item.is-active {
+                border-color: $color;
+                background-color: $color;
+                color: T.variant($name, "color");
+            }
+        }
+    }
+
+    &.is-disabled {
+        > .item,
+        > .item.is-active {
+            @include T.disabled();
+        }
+    }
+}

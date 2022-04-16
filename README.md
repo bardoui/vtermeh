@@ -43,11 +43,12 @@ const item = ref("");
 </style>
 ```
 
-| Property | Type            | Description          |
-| :------- | :-------------- | :------------------- |
-| items    | `Array<string>` | List of items        |
-| disabled | Boolean         | disabled state       |
-| failed   | Boolean         | failed state (error) |
+| Property   | Type      | Description                                             |
+| :--------- | :-------- | :------------------------------------------------------ |
+| items      | `Array`   | List of items                                           |
+| disabled   | `Boolean` | disabled state                                          |
+| failed     | `Boolean` | failed state (error)                                    |
+| identifier | `String`  | id field of item, empty identifier for non-object items |
 
 Choose component have following classes:
 
@@ -99,17 +100,17 @@ const item = ref();
 
 | Property    | Type                                               | default     | Description                                             |
 | :---------- | :------------------------------------------------- | :---------- | ------------------------------------------------------- |
-| search      | Boolean                                            | `false`     | allow search                                            |
-| delete      | Boolean                                            | `true`      | allow delete item with `ctrl+backspace`                 |
-| autoClose   | Boolean                                            | `true`      | close dropdown after select on single mode              |
-| multiple    | Boolean                                            | `false`     | allow multiple selection                                |
-| disabled    | Boolean                                            | `false`     | disabled state                                          |
-| failed      | Boolean                                            | `false`     | failed state (error)                                    |
-| placeholder | String                                             | `'Select'`  | placeholder text                                        |
-| identifier  | String                                             | `''`        | id field of item, empty identifier for non-object items |
-| items       | Array                                              | `[]`        | items list                                              |
-| searchValue | String                                             | `''`        | search model value                                      |
-| modelValue  | any                                                | `undefined` | model value                                             |
+| search      | `Boolean`                                            | `false`     | allow search                                            |
+| delete      | `Boolean`                                            | `true`      | allow delete item with `ctrl+backspace`                 |
+| autoClose   | `Boolean`                                            | `true`      | close dropdown after select on single mode              |
+| multiple    | `Boolean`                                            | `false`     | allow multiple selection                                |
+| disabled    | `Boolean`                                            | `false`     | disabled state                                          |
+| failed      | `Boolean`                                            | `false`     | failed state (error)                                    |
+| placeholder | `String`                                             | `'Select'`  | placeholder text                                        |
+| identifier  | `String`                                             | `''`        | id field of item, empty identifier for non-object items |
+| items       | `Array`                                              | `[]`        | items list                                              |
+| searchValue | `String`                                             | `''`        | search model value                                      |
+| modelValue  | `any`                                                | `undefined` | model value                                             |
 | keyHandler  | `(e: KeyboardEvent, selected: unknown) => boolean` | `undefined` | custom keyboard handler                                 |
 
 ## Field
@@ -198,6 +199,46 @@ File upload component use default termeh `.input` for styling.
 | opacity  | hover state opacity   | `0.1`   |
 
 You must use `"file-upload"` as component name for overriding variable in termeh.
+
+## Options
+
+options component. You can set default slot to change default item template.
+
+```vue
+<template>
+  <vOptions :items="items" v-model="item">
+    <template #default="{ item, disabled }">
+      {{ item == "first" ? "1th" : item == "second" ? "2th" : item }}
+    </template>
+  </vOptions>
+</template>
+<script lang="ts" setup>
+import { vOptions } from "@bardoui/vtermeh";
+const items = ref(["first", "second", "third"]);
+const item = ref("");
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/options.scss";
+</style>
+```
+
+| Property   | Type    | Description                                             |
+| :--------- | :------ | :------------------------------------------------------ |
+| items      | `Array` | List of items                                           |
+| identifier | String  | id field of item, empty identifier for non-object items |
+| disabled   | Boolean | disabled state                                          |
+| multiple   | Boolean | allow multiple selection                                |
+
+Options component have following classes:
+
+- **is-gapless**: remove item gaps.
+- **is-{gap}-gaped**: set options gap to registered iterable gaps.
+- **is-{color}**: set options color to registered iterable colors.
+
+| variable | description                                         | default |
+| :------- | :-------------------------------------------------- | :------ |
+| gaps     | list of non-iterable gaps to include in choose gaps | `()`    |
 
 ## Pagination
 

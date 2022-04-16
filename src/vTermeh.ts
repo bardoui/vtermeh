@@ -2,7 +2,16 @@ import vChoose from "./Choose.vue";
 import vDropdown from "./Dropdown.vue";
 import vField from "./Field.vue";
 import vFileUpload from "./FileUpload.vue";
+import vOptions from "./Options.vue";
 import vPagination from "./Pagination.vue";
 import vToggle from "./Toggle.vue";
 
-export { vChoose, vDropdown, vField, vFileUpload, vPagination, vToggle };
+export {
+    vChoose,
+    vDropdown,
+    vField,
+    vFileUpload,
+    vOptions,
+    vPagination,
+    vToggle
+};

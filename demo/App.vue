@@ -205,17 +205,51 @@
                         <div class="column is-half is-mobile-full">
                             <div class="card">
                                 <div class="field">
-                                    <vToggle v-model="toggleA">Reporting Service</vToggle>
+                                    <vToggle v-model="toggleA"
+                                        >Reporting Service</vToggle
+                                    >
                                 </div>
                                 <div class="field">
-                                    <vToggle v-model="toggleB" class="is-rounded" />
+                                    <vToggle
+                                        v-model="toggleB"
+                                        class="is-rounded"
+                                    />
                                 </div>
                                 <div class="field">
-                                    <vToggle v-model="toggleA" :disabled="true"/>
+                                    <vToggle
+                                        v-model="toggleA"
+                                        :disabled="true"
+                                    />
                                 </div>
                                 <div>
-                                    <vToggle v-model="toggleB" :disabled="true" class="is-rounded" />
+                                    <vToggle
+                                        v-model="toggleB"
+                                        :disabled="true"
+                                        class="is-rounded"
+                                    />
                                 </div>
+                            </div>
+                        </div>
+                        <div class="column is-half is-mobile-full">
+                            <div class="card">
+                                <vField>
+                                    <vOptions v-model="opt" :items="optItems" />
+                                </vField>
+                                <vField>
+                                    <vOptions
+                                        class="is-primary is-mini-gaped"
+                                        v-model="opt2"
+                                        :mutiple="true"
+                                        :items="optItems"
+                                    />
+                                </vField>
+                                <vField>
+                                    <vOptions
+                                        v-model="opt"
+                                        :disabled="true"
+                                        :items="optItems"
+                                    />
+                                </vField>
                             </div>
                         </div>
                     </div>
@@ -226,7 +260,14 @@
 </template>
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import { vChoose, vField, vFileUpload, vPagination, vToggle } from "@/vTermeh";
+import {
+    vChoose,
+    vField,
+    vFileUpload,
+    vOptions,
+    vPagination,
+    vToggle
+} from "@/vTermeh";
 import Dropdown from "./dropdown.vue";
 
 const items = ref(["none", "primary", "error", "disabled", "empty"]);
@@ -234,6 +275,17 @@ const item = ref("");
 const fileUP = ref();
 const toggleA = ref(false);
 const toggleB = ref(true);
+const optItems = [
+    "Firstname",
+    "Lastname",
+    "Some Long Option",
+    "Some Long Option",
+    "Age",
+    "Skills",
+    "Some Long Option",
+    "School",
+    "Some Long Option"
+];
 
 const mapper = (item: string) => {
     switch (item) {
@@ -252,6 +304,8 @@ const mapper = (item: string) => {
 
 const total = computed(() => (item.value == "empty" ? 0 : 15));
 const page = ref(0);
+const opt = ref("");
+const opt2 = ref([]);
 
 const classes = computed(() => {
     const cls: Record<string, boolean> = {};
