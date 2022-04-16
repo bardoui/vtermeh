@@ -19,11 +19,10 @@
         line-height: 1em;
         padding: T.control-padding();
         border-radius: T.var("radius", "normal");
+        border: T.var("decorator", "size") solid T.variant("base", "separator");
         @include T.transition(all);
 
         &:not(.is-active) {
-            border: T.var("decorator", "size") solid
-                T.variant("base", "separator");
             &:hover {
                 border-color: T.variant("shade", "light");
                 background-color: T.variant("shade", "light");
