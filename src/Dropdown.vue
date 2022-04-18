@@ -40,6 +40,14 @@
                 :placeholder="_placeholder"
                 @keydown.enter.prevent="ignoreHandler"
             />
+            <slot
+                name="action"
+                :isEmpty="isEmpty"
+                :isOpen="isOpen"
+                :isFiltered="isFiltered"
+                :failed="failed"
+                :disabled="disabled"
+            />
         </div>
         <div class="vdp-gap"></div>
         <div class="vdp-arrow">

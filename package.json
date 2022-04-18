@@ -1,6 +1,6 @@
 {
     "name": "@bardoui/vtermeh",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "private": false,
     "description": "termeh component for vue 3",
     "license": "ISC",

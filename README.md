@@ -77,6 +77,9 @@ Dropdown component.
     <template #selected="{ item, remove, failed, disabled}">
       Multi Select items
     </template>
+    <template #action="{ isEmpty, isOpen, isFiltered, failed, disabled}">
+      action
+    </template>
     <template #menu="{ isEmpty, isOpen, isFiltered, failed, disabled}">
       <div class="item" v-if="isFiltered">Add new</div>
     </template>
@@ -100,17 +103,17 @@ const item = ref();
 
 | Property    | Type                                               | default     | Description                                             |
 | :---------- | :------------------------------------------------- | :---------- | ------------------------------------------------------- |
-| search      | `Boolean`                                            | `false`     | allow search                                            |
-| delete      | `Boolean`                                            | `true`      | allow delete item with `ctrl+backspace`                 |
-| autoClose   | `Boolean`                                            | `true`      | close dropdown after select on single mode              |
-| multiple    | `Boolean`                                            | `false`     | allow multiple selection                                |
-| disabled    | `Boolean`                                            | `false`     | disabled state                                          |
-| failed      | `Boolean`                                            | `false`     | failed state (error)                                    |
-| placeholder | `String`                                             | `'Select'`  | placeholder text                                        |
-| identifier  | `String`                                             | `''`        | id field of item, empty identifier for non-object items |
-| items       | `Array`                                              | `[]`        | items list                                              |
-| searchValue | `String`                                             | `''`        | search model value                                      |
-| modelValue  | `any`                                                | `undefined` | model value                                             |
+| search      | `Boolean`                                          | `false`     | allow search                                            |
+| delete      | `Boolean`                                          | `true`      | allow delete item with `ctrl+backspace`                 |
+| autoClose   | `Boolean`                                          | `true`      | close dropdown after select on single mode              |
+| multiple    | `Boolean`                                          | `false`     | allow multiple selection                                |
+| disabled    | `Boolean`                                          | `false`     | disabled state                                          |
+| failed      | `Boolean`                                          | `false`     | failed state (error)                                    |
+| placeholder | `String`                                           | `'Select'`  | placeholder text                                        |
+| identifier  | `String`                                           | `''`        | id field of item, empty identifier for non-object items |
+| items       | `Array`                                            | `[]`        | items list                                              |
+| searchValue | `String`                                           | `''`        | search model value                                      |
+| modelValue  | `any`                                              | `undefined` | model value                                             |
 | keyHandler  | `(e: KeyboardEvent, selected: unknown) => boolean` | `undefined` | custom keyboard handler                                 |
 
 ## Field
