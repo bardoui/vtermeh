@@ -22,7 +22,14 @@
                     identifier="_id"
                     v-model="modelM"
                     v-model:searchValue="searchM"
+                    ref="dp"
                 >
+                    <template #action>
+                        <div class="meta is-action" @click.stop="dp && dp.close()">
+                            Close
+                        </div>
+                        <div class="gutter"></div>
+                    </template>
                     <template #selected="{remove, item}">
                         <div class="tag is-light is-primary">
                             <div class="gaper is-auto">
@@ -69,7 +76,7 @@
                 </vDropdown>
             </div>
             <div>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" />
             </div>
         </form>
     </div>
@@ -144,6 +151,7 @@ import Remove from "./remove.vue";
 
 const search = ref("");
 const model = ref();
+const dp = ref();
 const items = computed(() =>
     Data.filter(i =>
         [i.first_name, i.last_name]

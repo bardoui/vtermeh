@@ -96,7 +96,8 @@ import {
     onMounted,
     onUnmounted,
     watch,
-    nextTick
+    nextTick,
+    defineExpose
 } from "vue";
 
 // emits and props
@@ -114,6 +115,12 @@ const props = defineProps({
     searchValue: { type: String, default: "" },
     modelValue: { required: true },
     keyHandler: Function
+});
+defineExpose({
+    close: () => {
+        clicked.value = false;
+        focused.value = false;
+    }
 });
 
 // stats

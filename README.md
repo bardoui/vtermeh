@@ -101,6 +101,8 @@ const item = ref();
 
 **Note:** if you return true from key handler function, default dropdown keyboard handler not fired!
 
+**Note:** you can use `close` exposed function to manually close dropdown.
+
 | Property    | Type                                               | default     | Description                                             |
 | :---------- | :------------------------------------------------- | :---------- | ------------------------------------------------------- |
 | search      | `Boolean`                                          | `false`     | allow search                                            |
