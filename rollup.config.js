@@ -41,6 +41,7 @@ export default {
                 { src: "src/file-upload.scss", dest: "dist" },
                 { src: "src/options.scss", dest: "dist" },
                 { src: "src/pagination.scss", dest: "dist" },
+                { src: "src/pie.scss", dest: "dist" },
                 { src: "src/toggle.scss", dest: "dist" }
             ]
         }),

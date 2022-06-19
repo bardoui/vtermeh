@@ -68,19 +68,17 @@ Dropdown component.
 ```vue
 <template>
   <vDropdown :items="items" v-model="item" v-model:searchValue="search">
-    <template #icon="{ isEmpty, isOpen, isFiltered, failed, disabled}">
+    <template #icon="{ isEmpty, isOpen, isFiltered, failed, disabled }">
       Icon
     </template>
-    <template #selected="{ item, failed, disabled}">
-      Single item
-    </template>
-    <template #selected="{ item, remove, failed, disabled}">
+    <template #selected="{ item, failed, disabled }"> Single item </template>
+    <template #selected="{ item, remove, failed, disabled }">
       Multi Select items
     </template>
-    <template #action="{ isEmpty, isOpen, isFiltered, failed, disabled}">
+    <template #action="{ isEmpty, isOpen, isFiltered, failed, disabled }">
       action
     </template>
-    <template #menu="{ isEmpty, isOpen, isFiltered, failed, disabled}">
+    <template #menu="{ isEmpty, isOpen, isFiltered, failed, disabled }">
       <div class="item" v-if="isFiltered">Add new</div>
     </template>
     <template #default="{ id, selected, active, failed, disabled, item }">
@@ -145,15 +143,15 @@ import { vField } from "@bardoui/vtermeh";
 </script>
 ```
 
-| Property | Type           | Description                                                 |
-| :------- | :------------- | :---------------------------------------------------------- |
-| errors   | `Array|Object` | list of error keys or error with message                    |
-| messages | `Object`       | list of error messages (can override default error message) |
-| label    | `string`       | label text                                                  |
-| help     | `string`       | help text                                                   |
-| default  | `string`       | default error message                                       |
-| required | `bool`         | mark field as required                                      |
-| fit      | `bool`         | add `is-marginless` to field                                |
+| Property | Type     | Description                                                 |
+| :------- | :------- | :---------------------------------------------------------- | ---------------------------------------- |
+| errors   | `Array   | Object`                                                     | list of error keys or error with message |
+| messages | `Object` | list of error messages (can override default error message) |
+| label    | `string` | label text                                                  |
+| help     | `string` | help text                                                   |
+| default  | `string` | default error message                                       |
+| required | `bool`   | mark field as required                                      |
+| fit      | `bool`   | add `is-marginless` to field                                |
 
 ## FileUpload
 
@@ -251,9 +249,7 @@ Pagination component. You can fill default slot for change template of empty pag
 
 ```vue
 <template>
-  <vPagination :count="5" :total="23" v-model="page">
-    No Records
-  </vPagination>
+  <vPagination :count="5" :total="23" v-model="page"> No Records </vPagination>
 </template>
 <script lang="ts" setup>
 import { vPagination } from "@bardoui/vtermeh";
@@ -281,15 +277,45 @@ pagination component have following classes:
 | :------- | :---------------------------------------------------------- | :------ |
 | colors   | list of non-iterable colors to include in pagination colors | `()`    |
 
+## Pie
+
+Pie chart component. You can fill default slot to set label content.
+
+```vue
+<template>
+  <vPie :percent="75" class="is-primary">
+    <span>Interaction percent</span>
+  </vPie>
+</template>
+<script lang="ts" setup>
+import { vPie } from "@bardoui/vtermeh";
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/toggle.scss";
+</style>
+```
+
+| Property | Type     | Description        |
+| :------- | :------- | :----------------- |
+| percent  | `number` | chart fill percent |
+
+pie component have following classes:
+
+- **is-{color}**: set pie color to registered iterable colors.
+
+| variable | description                                          | default |
+| :------- | :--------------------------------------------------- | :------ |
+| size     | list of pie sizes `("small" 10em, "medium" 20em)`    | `()`    |
+| colors   | list of non-iterable colors to include in pie colors | `()`    |
+
 ## Toggle
 
 Toggle component. You can fill default slot to change label content.
 
 ```vue
 <template>
-  <vToggle :disabled="false" v-model="isEnabled">
-    Reporting Service
-  </vToggle>
+  <vToggle :disabled="false" v-model="isEnabled">Reporting Service</vToggle>
 </template>
 <script lang="ts" setup>
 import { vToggle } from "@bardoui/vtermeh";
@@ -305,7 +331,7 @@ const isEnabled = ref(true);
 | :------- | :-------- | :--------------------- |
 | disabled | `boolean` | disable toggle control |
 
-pagination component have following classes:
+toggle component have following classes:
 
 - **is-rounded**: make page buttons corner round.
 - **is-{color}**: set toggle color to registered iterable colors.
