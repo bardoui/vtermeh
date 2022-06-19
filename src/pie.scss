@@ -1,0 +1,67 @@
+@use "@bardoui/termeh/termeh.scss" as T;
+@use "sass:list";
+
+.v-pie {
+    display: block;
+    position: relative;
+    width: 5em;
+    height: 5em;
+    box-sizing: border-box;
+
+    .content {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-sizing: border-box;
+    }
+
+    svg {
+        display: block;
+        position: absolute;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        top: 50%;
+        left: 50%;
+        transform-origin: center center;
+        transform: translate(-50%, -50%) rotate(55deg);
+
+        .bar {
+            fill: transparent;
+            stroke: T.variant("base", "separator");
+            stroke-width: 3;
+            stroke-dasharray: 360;
+            stroke-dashoffset: 160;
+        }
+
+        .fill {
+            fill: transparent;
+            stroke: T.color("shade");
+            stroke-width: 5;
+            stroke-dasharray: 360;
+            stroke-dashoffset: 360;
+            transition: stroke-dashoffset 1s;
+        }
+    }
+
+    @each $name, $color in T.colors(T.var("pie", "colors", ())) {
+        &.is-#{$name} {
+            svg {
+                .fill {
+                    stroke: $color;
+                }
+            }
+        }
+    }
+
+    @each $size in T.var("pie", "sizes", ()) {
+        $name: list.nth($size, 1);
+        $size: list.nth($size, 2);
+        &.is-#{$name} {
+            width: $size;
+            height: $size;
+        }
+    }
+}

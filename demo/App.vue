@@ -252,6 +252,9 @@
                                 </vField>
                             </div>
                         </div>
+                        <div class="column is-half is-mobile-full">
+                            <Pie />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -269,6 +272,7 @@ import {
     vToggle
 } from "@/vTermeh";
 import Dropdown from "./dropdown.vue";
+import Pie from "./Pie.vue";
 
 const items = ref(["none", "primary", "error", "disabled", "empty"]);
 const item = ref("");
