@@ -117,6 +117,16 @@
                                         No Records
                                     </vPagination>
                                 </div>
+                                <div class="section is-secondary">
+                                    <h5>Simple</h5>
+                                    <vSimplePagination
+                                        :total="total"
+                                        v-model="page"
+                                        :class="classes"
+                                    >
+                                        No Records
+                                    </vSimplePagination>
+                                </div>
                             </div>
                         </div>
                         <div class="tile">
@@ -358,6 +368,7 @@ import {
     vJalaaliPicker,
     vOptions,
     vPagination,
+    vSimplePagination,
     vTile,
     vToggle,
     vToman,

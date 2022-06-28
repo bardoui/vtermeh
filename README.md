@@ -403,6 +403,43 @@ pie component have following classes:
 | sizes    | list of pie sizes `("small" 10em, "medium" 20em)`    | `()`    |
 | colors   | list of non-iterable colors to include in pie colors | `()`    |
 
+## Simple Pagination
+
+Simple pagination component. You can fill `default` slot for change template of empty pagination. pagination contains `prev-icon` and `next-icon` slots to change pagination icons.
+
+```vue
+<template>
+  <vSimplePagination :total="23" v-model="page" next="Go Next" prev="Go Prev">
+    <template #prev-icon>...</template>
+    <template #next-icon>...</template>
+    <template #default> No Records </template>
+  </vSimplePagination>
+</template>
+<script lang="ts" setup>
+import { vPagination } from "@bardoui/vtermeh";
+const page = ref(0);
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/simple-pagination.scss";
+</style>
+```
+
+| Property | Type     | Description      |
+| :------- | :------- | :--------------- |
+| total    | `Number` | total page count |
+| prev     | `String` | prev button text |
+| next     | `String` | next button text |
+
+pagination component have following classes:
+
+- **is-disabled**: disable pagination component.
+- **is-{color}**: set pagination color to registered iterable colors.
+
+| variable | description                                                 | default |
+| :------- | :---------------------------------------------------------- | :------ |
+| colors   | list of non-iterable colors to include in pagination colors | `()`    |
+
 ## Tile
 
 Create optimized tile layout.

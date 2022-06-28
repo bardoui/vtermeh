@@ -7,6 +7,7 @@ import vJalaaliPicker from "./JalaaliPicker.vue";
 import vOptions from "./Options.vue";
 import vPagination from "./Pagination.vue";
 import vPie from "./Pie.vue";
+import vSimplePagination from "./SimplePagination.vue";
 import vTile from "./Tile.vue";
 import vToggle from "./Toggle.vue";
 import vToman from "./Toman.vue";
@@ -21,6 +22,7 @@ export {
     vOptions,
     vPagination,
     vPie,
+    vSimplePagination,
     vTile,
     vToggle,
     vToman,

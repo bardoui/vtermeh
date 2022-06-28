@@ -1,0 +1,80 @@
+@use "@bardoui/termeh/termeh.scss" as T;
+@forward "@bardoui/termeh/components/icon.scss";
+@forward "@bardoui/termeh/layout/gaper.scss";
+
+.v-simple-pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    overflow: hidden;
+    direction: ltr;
+
+    > .vsp-pages {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: stretch;
+        background: T.color("input");
+        border-radius: T.var("radius", "rounded");
+        border: 1px solid T.variant("base", "separator");
+        overflow: hidden;
+
+        .vsp-button {
+            display: block;
+            line-height: 1em;
+            padding: T.control-padding();
+            @include T.transition(all);
+
+            &:not(.is-disabled) {
+                cursor: pointer;
+
+                .icon {
+                    color: T.variant("shade", "readable");
+                }
+
+                &:hover {
+                    background-color: T.variant("shade", "light");
+                    color: T.variant("shade", "readable");
+                }
+            }
+
+            &:first-child {
+                border-right: 1px solid T.variant("base", "separator");
+            }
+
+            &.is-disabled {
+                @include T.locked();
+                background: none !important;
+                color: T.variant("input", "disabled-color") !important;
+            }
+        }
+
+        &.is-empty {
+            padding: T.control-padding();
+        }
+    }
+
+    @each $name, $color in T.colors(T.var("pagination", "colors", ())) {
+        &.is-#{$name} {
+            &:not(.is-disabled) > .vsp-pages > .vsp-button {
+                &:not(.is-disabled) {
+                    .icon {
+                        color: T.variant($name, "readable");
+                    }
+
+                    &:hover {
+                        background-color: T.variant($name, "light");
+                        color: T.variant($name, "readable");
+                    }
+                }
+            }
+        }
+    }
+
+    &.is-disabled {
+        .vsp-pages {
+            @include T.disabled();
+        }
+    }
+}
