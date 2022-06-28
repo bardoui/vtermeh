@@ -15,10 +15,13 @@
         flex: 0 0 auto;
         display: flex;
         align-items: stretch;
-        background: T.color("input");
-        border-radius: T.var("radius", "rounded");
-        border: 1px solid T.variant("base", "separator");
         overflow: hidden;
+
+        &:not(.is-empty) {
+            background: T.color("input");
+            border-radius: T.var("radius", "rounded");
+            border: 1px solid T.variant("base", "separator");
+        }
 
         .vsp-button {
             display: block;
