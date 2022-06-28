@@ -1,17 +1,24 @@
 <template>
     <div class="layout">
-        <div class="attachment">
-            <div class="container is-paddingless">
-                <h2 class="is-shade-colored is-marginless">
-                    Termeh Based Component For Vue 3
-                </h2>
-            </div>
-        </div>
         <div class="content">
             <div>
                 <div class="container">
-                    <div class="grid">
-                        <div class="column is-half is-mobile-full">
+                    <vTile ref="tile" :rtl="false">
+                        <div class="tile is-2">
+                            <div class="card">
+                                <div class="header is-primary is-marginless">
+                                    <h5
+                                        class="is-primary-colored is-marginless"
+                                    >
+                                        Termeh Based Component For Vue 3
+                                    </h5>
+                                    <div class="meta">
+                                        layout created by tile component
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile">
                             <div class="card">
                                 <div></div>
                                 <div class="section is-attached">
@@ -42,14 +49,14 @@
                                         v-model="item"
                                         :class="classes"
                                     >
-                                        <template #default="{item}">
+                                        <template #default="{ item }">
                                             {{ mapper(item) }}
                                         </template>
                                     </vChoose>
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-half is-mobile-full">
+                        <div class="tile">
                             <div class="card">
                                 <div></div>
                                 <div class="section is-attached">
@@ -112,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-half is-mobile-full">
+                        <div class="tile">
                             <div class="card">
                                 <div></div>
                                 <div class="section is-attached">
@@ -162,7 +169,7 @@
                                 </vField>
                             </div>
                         </div>
-                        <div class="column is-half is-mobile-full">
+                        <div class="tile">
                             <div class="card">
                                 <div></div>
                                 <div class="section is-attached">
@@ -201,8 +208,10 @@
                                 </div>
                             </div>
                         </div>
-                        <Dropdown />
-                        <div class="column is-half is-mobile-full">
+                        <div class="tile">
+                            <Dropdown @update="update" />
+                        </div>
+                        <div class="tile">
                             <div class="card">
                                 <div class="field">
                                     <vToggle v-model="toggleA"
@@ -230,7 +239,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="column is-half is-mobile-full">
+                        <div class="tile">
                             <div class="card">
                                 <vField>
                                     <vOptions v-model="opt" :items="optItems" />
@@ -252,28 +261,113 @@
                                 </vField>
                             </div>
                         </div>
-                        <div class="column is-half is-mobile-full">
-                            <Pie />
+                        <div class="tile">
+                            <Pie @update="update" />
                         </div>
-                    </div>
+                        <div class="tile">
+                            <div class="card">
+                                <vJalaaliPicker
+                                    v-model="jalaali"
+                                    type="datetime"
+                                    color-class="success"
+                                    color="#0ead69"
+                                />
+                                <br />
+                                <vJalaaliPicker v-model="jalaali" :icon="true">
+                                    <template #icon="{ show }">
+                                        <div
+                                            class="button is-primary"
+                                            @click="show()"
+                                        >
+                                            Select
+                                        </div>
+                                    </template>
+                                </vJalaaliPicker>
+                                <br />
+                                <vJalaaliPicker
+                                    v-model="jalaalies"
+                                    :range="true"
+                                    clear="CLS"
+                                />
+                                <br />
+                                <vJalaaliPicker
+                                    v-model="jalaalies"
+                                    :multiple="true"
+                                    :icon="true"
+                                    clear="CLEAR"
+                                />
+                            </div>
+                        </div>
+                        <div class="tile">
+                            <div class="card">
+                                <div class="gaper is-auto">
+                                    <vIconToggle
+                                        v-model="iconToggle"
+                                        class="is-large"
+                                    >
+                                        <template #icon>
+                                            <Star />
+                                        </template>
+                                        <template #active>
+                                            <StarFill />
+                                        </template>
+                                    </vIconToggle>
+                                    <vIconToggle
+                                        v-model="iconToggle"
+                                        class="is-medium is-primary"
+                                    >
+                                        <template #icon>
+                                            <Star />
+                                        </template>
+                                        <template #active>
+                                            <StarFill />
+                                        </template>
+                                    </vIconToggle>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tile">
+                            <div class="card">
+                                <div class="gaper is-auto">
+                                    <h1>
+                                        <vToman :value="1200000" />
+                                    </h1>
+                                    <h4>
+                                        <vToman
+                                            :value="1200000"
+                                            class="is-primary"
+                                        />
+                                    </h4>
+                                    <vToman :value="1200000" class="is-error" />
+                                </div>
+                            </div>
+                        </div>
+                    </vTile>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref, onUpdated } from "vue";
 import {
     vChoose,
     vField,
     vFileUpload,
+    vIconToggle,
+    vJalaaliPicker,
     vOptions,
     vPagination,
-    vToggle
+    vTile,
+    vToggle,
+    vToman,
 } from "@/vTermeh";
 import Dropdown from "./dropdown.vue";
 import Pie from "./Pie.vue";
+import Star from "./Star.vue";
+import StarFill from "./StarFill.vue";
 
+const tile = ref();
 const items = ref(["none", "primary", "error", "disabled", "empty"]);
 const item = ref("");
 const fileUP = ref();
@@ -288,7 +382,7 @@ const optItems = [
     "Skills",
     "Some Long Option",
     "School",
-    "Some Long Option"
+    "Some Long Option",
 ];
 
 const mapper = (item: string) => {
@@ -311,6 +405,11 @@ const page = ref(0);
 const opt = ref("");
 const opt2 = ref([]);
 
+const jalaali = ref();
+const jalaalies = ref([]);
+
+const iconToggle = ref(false);
+
 const classes = computed(() => {
     const cls: Record<string, boolean> = {};
     if (item.value == "none") cls["is-success"] = true;
@@ -327,7 +426,7 @@ const errors = computed(() => {
     } else if (err.value == "object") {
         return {
             required: "This field is required!",
-            max: "can't greater than max!"
+            max: "can't greater than max!",
         };
     }
     return [];
@@ -335,7 +434,7 @@ const errors = computed(() => {
 const messages = computed(() => {
     if (err.value) {
         return {
-            required: "REQUIRED"
+            required: "REQUIRED",
         };
     }
     return {};
@@ -345,6 +444,12 @@ const log = (v: unknown) => console.log(v);
 const doClear = () => {
     fileUP.value && fileUP.value.clear();
 };
+
+// hooks
+onUpdated(update);
+function update() {
+    tile.value && tile.value.update();
+}
 </script>
 
 <style lang="scss">

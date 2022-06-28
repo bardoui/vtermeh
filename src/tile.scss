@@ -1,0 +1,49 @@
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+.v-tile {
+    $unit: math.div(100%, T.var("tile", "columns", 3));
+    margin: T.negate(math.div(T.gap("macro"), 2));
+    display: block;
+    box-sizing: border-box;
+
+    .tile-sizer {
+        width: $unit;
+    }
+
+    .tile {
+        display: block;
+        max-width: 100%;
+        width: $unit;
+        box-sizing: border-box;
+        padding: math.div(T.gap("macro"), 2);
+
+        @for $i from 1 through T.var("tile", "columns", 3) {
+            &--width#{$i},
+            &.is-#{$i} {
+                width: $i * $unit;
+            }
+        }
+    }
+
+    @each $name, $gap in T.gaps(T.var("tile", "gaps", ())) {
+        &.is-#{$name}-gaped {
+            margin: T.negate(math.div($gap, 2));
+            > .tile {
+                padding: math.div($gap, 2);
+            }
+        }
+    }
+
+    @include T.mobile() {
+        .tile-sizer,
+        .tile {
+            width: 100%;
+            @for $i from 1 through T.var("tile", "columns", 3) {
+                &--width#{$i},
+                &.is-#{$i} {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

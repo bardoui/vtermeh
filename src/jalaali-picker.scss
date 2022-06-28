@@ -1,0 +1,153 @@
+@use "@bardoui/termeh/termeh.scss" as T;
+@forward "@bardoui/termeh/components/icon.scss";
+@forward "@bardoui/termeh/components/button.scss";
+
+.vpd-wrapper {
+    background-color: T.var(
+        "modal",
+        "overlay",
+        T.var("overlay", "background")
+    ) !important;
+
+    .vpd-content {
+        border-radius: T.var("radius", "normal");
+        box-shadow: T.var(
+            "card",
+            "shadow",
+            (
+                T.shadow(0, 3px, T.color("shade"), false),
+                T.shadow(0, 6px, T.color("shade"), true)
+            )
+        );
+        border-bottom: T.var("decorator", "size") solid T.color("primary");
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        overflow: hidden;
+
+        .vpd-header {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+            padding: T.gap("macro");
+
+            .vpd-date {
+                flex: 1 1 0;
+                font-size: T.size("medium");
+                line-height: 1em;
+                height: unset;
+            }
+
+            .vpd-year-label {
+                display: block;
+                box-sizing: border-box;
+                color: T.variant("primary", "light");
+                border-radius: T.var("radius", "normal");
+                padding: T.control-padding();
+                line-height: 1em;
+                height: unset;
+                margin: 0;
+                opacity: 1;
+
+                > span {
+                    line-height: 1em;
+                    height: unset;
+                    padding: 0;
+                    border: none;
+                }
+
+                &:hover {
+                    color: white;
+                    > span {
+                        border: none;
+                        color: inherit;
+                    }
+                }
+            }
+        }
+
+        .vpd-weekday {
+            color: T.variant("shade", "mute");
+        }
+
+        .vpd-close-addon {
+            top: T.gap("micro");
+            left: T.gap("micro");
+            box-sizing: border-box;
+            width: 24px;
+            height: 24px;
+            line-height: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: T.variant("error", "light");
+            color: T.variant("error", "readable");
+            border-radius: T.var("radius", "circle");
+            @include T.transition(all);
+
+            .icon {
+                @include T.transition(all);
+            }
+
+            &:hover {
+                transform: rotate(90deg);
+                .icon {
+                    transform: scale(1.5);
+                }
+            }
+        }
+
+        .vpd-addon-list-item {
+            &.vpd-selected {
+                background: T.variant("base", "section");
+            }
+
+            &:hover {
+                background: T.variant("base", "section");
+            }
+        }
+
+        .vpd-time .vpd-time-h,
+        .vpd-time .vpd-time-m {
+            color: T.variant("shade", "mute");
+
+            svg path {
+                fill: currentColor;
+            }
+        }
+
+        .vpd-day[disabled="true"] {
+            color: T.variant("shade", "mute");
+            .vpd-day-text {
+                color: inherit;
+            }
+        }
+    }
+}
+
+.vpd-actions {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+    button,
+    .button {
+        flex: 1 1 0;
+        margin: 0 1px;
+    }
+}
+
+.is-ltr {
+    direction: ltr;
+}
+
+.is-rtl {
+    direction: rtl;
+}
+
+.vpd-main {
+    @each $name, $color in T.colors(()) {
+        &.is-#{$name} {
+            @include T.selection($name);
+        }
+    }
+}

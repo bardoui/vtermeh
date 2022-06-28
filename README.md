@@ -141,6 +141,9 @@ Field wrapper component (based on termeh form field).
 <script lang="ts" setup>
 import { vField } from "@bardoui/vtermeh";
 </script>
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/field.scss";
+</style>
 ```
 
 | Property | Type     | Description                                                 |
@@ -202,6 +205,97 @@ File upload component use default termeh `.input` for styling.
 | opacity  | hover state opacity   | `0.1`   |
 
 You must use `"file-upload"` as component name for overriding variable in termeh.
+
+## Icon Toggle
+
+Icon toggle component. you must set `icon` and `active` slot to set different state icons.
+
+```vue
+<template>
+  <vIconToggle v-model="selected" class="is-large is-primary">
+    <template #icon>
+      <Star />
+    </template>
+    <template #active>
+      <StarFill />
+    </template>
+  </vIconToggle>
+</template>
+<script lang="ts" setup>
+import { vIconToggle } from "@bardoui/vtermeh";
+const selected = ref(false);
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/icon-toggle.scss";
+</style>
+```
+
+Icon toggle follow icon styling.
+
+## Jalaali Date Picker
+
+Create jalaali date picker input.
+
+**Caution:** you must install `vue3-persian-datetime-picker` and register component as `vJalaaliPicker` to make date picker work!
+
+**Note:** you must set picker color using `color` option on register time or color property.
+
+```vue
+<template>
+  <vJalaaliPicker v-model="jalaali" type="datetime" />
+  <br />
+  <vJalaaliPicker v-model="jalaali" :icon="true">
+    <template #icon="{ show }">
+      <div class="button is-primary" @click="show()">Select</div>
+    </template>
+  </vJalaaliPicker>
+  <br />
+  <vJalaaliPicker v-model="jalaalies" :range="true" clear="CLS" />
+  <br />
+  <vJalaaliPicker
+    v-model="jalaalies"
+    :multiple="true"
+    :icon="true"
+    clear="CLEAR"
+  />
+</template>
+<script lang="ts" setup>
+import { vJalaaliPicker } from "@bardoui/vtermeh";
+const jalaali = ref();
+const jalaalies = ref([]);
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/jalaali-picker.scss";
+</style>
+```
+
+| Property    | Type      | Description                                                    |
+| :---------- | :-------- | :------------------------------------------------------------- |
+| rtl         | `Boolean` | make input layout rtl                                          |
+| range       | `Boolean` | allow select date range                                        |
+| multiple    | `Boolean` | allow select multiple date                                     |
+| icon        | `Boolean` | make action date picker (no input field) date                  |
+| inputMode   | `String`  | input mode, default to `numeric`                               |
+| colorClass  | `String`  | set elements color (icon, input, button), default to `primary` |
+| placeholder | `String`  | input placeholder text                                         |
+| clear       | `String`  | set clear button title and enable clearing from dialog         |
+
+**Note:** this component accept all `vue3-persian-datetime-picker` properties.
+
+Jalaali picker component have following slots:
+
+```vue
+<template>
+  <vJalaaliPicker>
+    <!-- only in non-icon mode for add extra content to input -->
+    <template #input="{ show, clear }"></template>
+    <!-- input calendar icon in non-icon and action icon in icon mode -->
+    <template #input="{ show }"></template>
+  </vJalaaliPicker>
+</template>
+```
 
 ## Options
 
@@ -292,7 +386,7 @@ import { vPie } from "@bardoui/vtermeh";
 </script>
 
 <style lang="scss">
-@import "@bardoui/vtermeh/dist/toggle.scss";
+@import "@bardoui/vtermeh/dist/pie.scss";
 </style>
 ```
 
@@ -306,8 +400,44 @@ pie component have following classes:
 
 | variable | description                                          | default |
 | :------- | :--------------------------------------------------- | :------ |
-| size     | list of pie sizes `("small" 10em, "medium" 20em)`    | `()`    |
+| sizes    | list of pie sizes `("small" 10em, "medium" 20em)`    | `()`    |
 | colors   | list of non-iterable colors to include in pie colors | `()`    |
+
+## Tile
+
+Create optimized tile layout.
+
+**Caution:** if your content size changed you must call `update()` method on tile component.
+
+```vue
+<template>
+  <vTile ref="el" class="is-large-gaped" :horizontalOrder="false">
+    <div class="tile is-2">...</div>
+    <div class="tile">...</div>
+    <div class="tile">...</div>
+    <div class="tile">...</div>
+    <div class="tile">...</div>
+    <div class="tile">...</div>
+    <div class="tile">...</div>
+  </vTile>
+</template>
+```
+
+| Property        | Type      | Description                                          |
+| :-------------- | :-------- | :--------------------------------------------------- |
+| rtl             | `Boolean` | generate rtl layout                                  |
+| horizontalOrder | `Boolean` | lays out items to (mostly) maintain horizontal order |
+| originTop       | `Boolean` | attach items to top                                  |
+
+tile component have following classes:
+
+- **is-{gap}-gaped**: set tile items gap to registered iterable gaps.
+- **is-{column}**: set tile item width to column. e.g. `tile is-2`
+
+| variable | description                                       | default |
+| :------- | :------------------------------------------------ | :------ |
+| columns  | tiles column count                                | `3`     |
+| gaps     | list of non-iterable gaps to include in tile gaps | `()`    |
 
 ## Toggle
 
@@ -339,3 +469,38 @@ toggle component have following classes:
 | variable | description                                             | default |
 | :------- | :------------------------------------------------------ | :------ |
 | colors   | list of non-iterable colors to include in toggle colors | `()`    |
+
+## Toman
+
+Persian currency (تومان) component with icon.
+
+```vue
+<template>
+  <vToman :value="1200000" class="is-primary" />
+  <h6>
+    <vToman :value="9310500" class="is-error" />
+  </h6>
+</template>
+<script lang="ts" setup>
+import { vToman } from "@bardoui/vtermeh";
+</script>
+
+<style lang="scss">
+@import "@bardoui/vtermeh/dist/toman.scss";
+</style>
+```
+
+| Property   | Type      | Description                                             |
+| :--------- | :-------- | :------------------------------------------------------ |
+| items      | `Array`   | List of items                                           |
+| disabled   | `Boolean` | disabled state                                          |
+| failed     | `Boolean` | failed state (error)                                    |
+| identifier | `String`  | id field of item, empty identifier for non-object items |
+
+Toman component have following classes:
+
+- **is-{color}**: set toman color to registered iterable colors.
+
+| variable | description                                           | default |
+| :------- | :---------------------------------------------------- | :------ |
+| sizes    | list of non-iterable sizes to include in choose sizes | `()`    |

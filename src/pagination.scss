@@ -93,6 +93,8 @@
                     }
                 }
             }
+
+            @include T.selection($name);
         }
     }
 

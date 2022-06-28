@@ -64,6 +64,8 @@
                 background: $color;
                 color: T.variant($name, "color");
             }
+
+            @include T.selection($name);
         }
     }
 

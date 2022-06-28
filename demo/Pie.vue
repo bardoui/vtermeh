@@ -16,11 +16,14 @@
 
 <script lang="ts" setup>
 import { vPie } from "@/vTermeh";
-import { ref } from "vue";
+import { onUpdated, defineEmits, ref } from "vue";
 
 const amount = ref(0);
 
 function random() {
     amount.value = Math.floor(Math.random() * 100);
 }
+
+const emits = defineEmits(["update"]);
+onUpdated(() => emits("update"));
 </script>

@@ -8,7 +8,7 @@
     height: 5em;
     box-sizing: border-box;
 
-    .content {
+    .vp-content {
         display: block;
         position: absolute;
         top: 50%;
@@ -28,7 +28,7 @@
         transform-origin: center center;
         transform: translate(-50%, -50%) rotate(55deg);
 
-        .bar {
+        .vp-bar {
             fill: transparent;
             stroke: T.variant("base", "separator");
             stroke-width: 3;
@@ -36,7 +36,7 @@
             stroke-dashoffset: 160;
         }
 
-        .fill {
+        .vp-fill {
             fill: transparent;
             stroke: T.color("shade");
             stroke-width: 5;
@@ -49,10 +49,12 @@
     @each $name, $color in T.colors(T.var("pie", "colors", ())) {
         &.is-#{$name} {
             svg {
-                .fill {
+                .vp-fill {
                     stroke: $color;
                 }
             }
+
+            @include T.selection($name);
         }
     }
 

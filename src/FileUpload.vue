@@ -33,7 +33,7 @@ import {
     defineExpose,
     computed,
     ref,
-    useSlots
+    useSlots,
 } from "vue";
 import { generate } from "shortid";
 // Props and emits
@@ -42,7 +42,7 @@ const emits = defineEmits(["select"]);
 const props = defineProps({
     multiple: Boolean,
     accept: String,
-    icons: Object
+    icons: Object,
 });
 defineExpose({ clear });
 
@@ -55,7 +55,7 @@ const id = computed(() => generate());
 const count = computed(() => (files.value ? files.value.length : 0));
 const hasThumbnails = computed(() => !!slots["thumbnails"]);
 const thumbnails = computed(() => {
-    const res = [];
+    const res: any[] = [];
     if (files.value && files.value.length) {
         const icons =
             props.icons &&

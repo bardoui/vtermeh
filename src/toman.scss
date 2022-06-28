@@ -1,0 +1,32 @@
+@use "@bardoui/termeh/termeh.scss" as T;
+@forward "@bardoui/termeh/components/icon.scss";
+
+.v-toman {
+    display: inline-flex;
+    align-items: center;
+    direction: rtl;
+
+    .vt-amount {
+        display: block;
+        direction: ltr;
+    }
+
+    .vt-icon {
+        margin-right: 4px;
+        color: T.variant("shade", "readable");
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+    @each $name, $color in T.colors(()) {
+        &.is-#{$name} {
+            color: T.variant($name, "readable");
+
+            .icon {
+                color: T.variant($name, "mute");
+            }
+
+            @include T.selection($name);
+        }
+    }
+}

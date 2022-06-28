@@ -4,7 +4,7 @@
         :class="{
             'is-failed': !!_errors.length,
             'is-required': required,
-            'is-margin-less': fit
+            'is-margin-less': fit,
         }"
     >
         <label :for="id" v-if="label">{{ label }}:</label>
@@ -27,13 +27,13 @@ const props = defineProps({
     help: String,
     default: { type: String, default: "مقدار نامعتبر است" },
     required: { type: Boolean, default: false },
-    fit: { type: Boolean, default: false }
+    fit: { type: Boolean, default: false },
 });
 
 // computed
 const id = computed(() => generate());
 const _errors = computed(() => {
-    const res = [];
+    const res: any[] = [];
     if (isObject(props.errors)) {
         for (const key in props.errors) {
             res.push(_resolve(key, props.errors[key]));

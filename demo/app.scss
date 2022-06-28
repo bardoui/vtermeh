@@ -9,11 +9,16 @@
 // Components
 @import "@/choose.scss";
 @import "@/dropdown.scss";
+@import "@/field.scss";
 @import "@/file-upload.scss";
+@import "@/icon-toggle.scss";
+@import "@/jalaali-picker.scss";
 @import "@/options.scss";
 @import "@/pagination.scss";
-@import "@/toggle.scss";
 @import "@/pie.scss";
+@import "@/tile.scss";
+@import "@/toggle.scss";
+@import "@/toman.scss";
 
 // Custom styling
 #app {
@@ -21,7 +26,7 @@
     height: 100%;
     margin: 0;
     padding: 1rem;
-    background: T.variant("base", "separator");
+    background: T.variant("base", "section");
 }
 section {
     display: block;
