@@ -237,7 +237,7 @@ Icon toggle follow icon styling.
 
 Create jalaali date picker input.
 
-**Caution:** you must install `vue3-persian-datetime-picker` and register component as `vJalaaliPicker` to make date picker work!
+**Caution:** you must install `vue3-persian-datetime-picker` and register component as `v3-datetime-picker` to make date picker work!
 
 **Note:** you must set picker color using `color` option on register time or color property.
 

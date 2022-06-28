@@ -5,7 +5,7 @@ import VuePersianDatetimePicker from "vue3-persian-datetime-picker";
 
 const app = createApp(App);
 app.use(VuePersianDatetimePicker, {
-    name: "vJalaaliPicker",
+    name: "v3-datetime-picker",
     props: {
         format: "YYYY-MM-DDTHH:mm:ssZ",
         displayFormat: "jYYYY-jMM-jDD",

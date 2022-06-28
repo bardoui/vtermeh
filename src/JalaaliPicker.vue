@@ -117,7 +117,7 @@
 
     <!-- datepicker -->
     <Component
-        :is="'vJalaaliPicker'"
+        :is="'v3-datetime-picker'"
         v-bind="$attrs"
         v-model="model"
         :show="show"
