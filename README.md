@@ -149,12 +149,12 @@ import { vField } from "@bardoui/vtermeh";
 | Property | Type     | Description                                                 |
 | :------- | :------- | :---------------------------------------------------------- | ---------------------------------------- |
 | errors   | `Array   | Object`                                                     | list of error keys or error with message |
-| messages | `Object` | list of error messages (can override default error message) |
-| label    | `string` | label text                                                  |
-| help     | `string` | help text                                                   |
-| default  | `string` | default error message                                       |
-| required | `bool`   | mark field as required                                      |
-| fit      | `bool`   | add `is-marginless` to field                                |
+| messages | `Object` | list of error messages (can override default error message) |                                          |
+| label    | `string` | label text                                                  |                                          |
+| help     | `string` | help text                                                   |                                          |
+| default  | `string` | default error message                                       |                                          |
+| required | `bool`   | mark field as required                                      |                                          |
+| fit      | `bool`   | add `is-marginless` to field                                |                                          |
 
 ## FileUpload
 
@@ -271,16 +271,17 @@ const jalaalies = ref([]);
 </style>
 ```
 
-| Property    | Type      | Description                                                    |
-| :---------- | :-------- | :------------------------------------------------------------- |
-| rtl         | `Boolean` | make input layout rtl                                          |
-| range       | `Boolean` | allow select date range                                        |
-| multiple    | `Boolean` | allow select multiple date                                     |
-| icon        | `Boolean` | make action date picker (no input field) date                  |
-| inputMode   | `String`  | input mode, default to `numeric`                               |
-| colorClass  | `String`  | set elements color (icon, input, button), default to `primary` |
-| placeholder | `String`  | input placeholder text                                         |
-| clear       | `String`  | set clear button title and enable clearing from dialog         |
+| Property     | Type      | Description                                                    |
+| :----------- | :-------- | :------------------------------------------------------------- |
+| rtl          | `Boolean` | make input layout rtl                                          |
+| range        | `Boolean` | allow select date range                                        |
+| multiple     | `Boolean` | allow select multiple date                                     |
+| icon         | `Boolean` | make action date picker (no input field) date                  |
+| inputMode    | `String`  | input mode, default to `numeric`                               |
+| colorClass   | `String`  | set elements color (icon, input, button), default to `primary` |
+| placeholder  | `String`  | input placeholder text                                         |
+| clear        | `String`  | set clear button title and enable clearing from dialog         |
+| closeOnClear | `Boolean` | close date picker by clear button                              |
 
 **Note:** this component accept all `vue3-persian-datetime-picker` properties.
 

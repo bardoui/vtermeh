@@ -217,12 +217,7 @@
             <div
                 v-if="clear"
                 class="button is-simple is-error"
-                @click.stop="
-                    () => {
-                        _clear();
-                        vm.visible = false;
-                    }
-                "
+                @click.stop="_clear(vm)"
             >
                 {{ clear }}
             </div>
@@ -255,6 +250,7 @@ const props = defineProps({
     colorClass: { type: String, default: "primary" },
     placeholder: { type: String, default: "وارد کنید" },
     clear: { type: String, default: "" },
+    closeOnClear: { type: Boolean, default: false },
     modelValue: { required: false },
 });
 
@@ -275,5 +271,15 @@ const colClass = computed(() => {
 
 // methods
 const _show = () => (show.value = true);
-const _clear = () => (model.value = props.range || props.multiple ? [] : null);
+const _clear = (vm: any) => {
+    const v = props.range || props.multiple ? [] : null;
+    if (vm) {
+        vm.selectedDates = v;
+        // close
+        if (props.closeOnClear) {
+            vm.visible = false;
+        }
+    }
+    model.value = v;
+};
 </script>
