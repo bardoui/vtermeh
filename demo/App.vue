@@ -281,6 +281,7 @@
                                     type="datetime"
                                     color-class="success"
                                     color="#0ead69"
+                                    clear="clear"
                                 />
                                 <br />
                                 <vJalaaliPicker v-model="jalaali" :icon="true">

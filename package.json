@@ -1,6 +1,6 @@
 {
     "name": "@bardoui/vtermeh",
-    "version": "1.7.4",
+    "version": "1.7.5",
     "private": false,
     "description": "termeh component for vue 3",
     "license": "ISC",
@@ -40,6 +40,7 @@
         "@bardoui/vutils": "^1.1.0",
         "core-js": "^3.6.5",
         "masonry-layout": "^4.2.2",
+        "moment-jalaali": "^0.9.6",
         "shortid": "^2.2.16",
         "vue": "^3.2.13",
         "vue3-persian-datetime-picker": "^1.2.2"

@@ -146,7 +146,7 @@ import { vField } from "@bardoui/vtermeh";
 </style>
 ```
 
-| Property | Type     | Description                                                 |
+| Property | Type     | Description                                                 |                                          |
 | :------- | :------- | :---------------------------------------------------------- | ---------------------------------------- |
 | errors   | `Array   | Object`                                                     | list of error keys or error with message |
 | messages | `Object` | list of error messages (can override default error message) |                                          |

@@ -238,6 +238,7 @@
 <script lang="ts" setup>
 import { defineEmits, defineProps, ref, computed } from "vue";
 import { generate } from "shortid";
+import moment from "moment-jalaali";
 
 // events and props
 const emits = defineEmits(["update:modelValue"]);
@@ -271,15 +272,39 @@ const colClass = computed(() => {
 
 // methods
 const _show = () => (show.value = true);
+const _equal = (a: unknown, b: unknown): boolean => {
+    const _arr = (v: unknown) => (Array.isArray(v) ? v : v ? [v] : []);
+    const aArr = _arr(a);
+    const bArr = _arr(b);
+    if (aArr.length != bArr.length) {
+        return false;
+    }
+    for (let i = 0; i < aArr.length; i++) {
+        const _a = moment(aArr[i]);
+        const _b = moment(bArr[i]);
+        if (
+            !_a.isValid() ||
+            !_b.isValid() ||
+            _a.utc().format("YYYY-MM-DD") != _b.utc().format("YYYY-MM-DD")
+        ) {
+            return false;
+        }
+    }
+    return true;
+};
+
 const _clear = (vm: any) => {
-    const v = props.range || props.multiple ? [] : null;
     if (vm) {
-        vm.selectedDates = v;
+        const emptyV = props.range || props.multiple ? [] : null;
+        if (_equal(model.value, vm.selectedDates)) {
+            model.value = emptyV;
+        } else {
+            vm.selectedDates = emptyV;
+        }
         // close
         if (props.closeOnClear) {
             vm.visible = false;
         }
     }
-    model.value = v;
 };
 </script>
