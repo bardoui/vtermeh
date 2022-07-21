@@ -353,6 +353,41 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tile">
+                            <div class="card">
+                                <vTab
+                                    class="is-large-padded is-primary"
+                                    v-model:tab="tab"
+                                >
+                                    <template #tabs="{ style }">
+                                        <div
+                                            class="tab"
+                                            :class="style('A')"
+                                            @click="tab = 'A'"
+                                        >
+                                            A
+                                        </div>
+                                        <div
+                                            class="tab"
+                                            :class="style('B')"
+                                            @click="tab = 'B'"
+                                        >
+                                            B
+                                        </div>
+                                        <div
+                                            class="tab"
+                                            :class="style('C')"
+                                            @click="tab = 'C'"
+                                        >
+                                            C
+                                        </div>
+                                    </template>
+                                    <template #A>A</template>
+                                    <template #B>B</template>
+                                    <template #C>C</template>
+                                </vTab>
+                            </div>
+                        </div>
                     </vTile>
                 </div>
             </div>
@@ -370,6 +405,7 @@ import {
     vOptions,
     vPagination,
     vSimplePagination,
+    vTab,
     vTile,
     vToggle,
     vToman,
@@ -416,6 +452,7 @@ const total = computed(() => (item.value == "empty" ? 0 : 15));
 const page = ref(0);
 const opt = ref("");
 const opt2 = ref([]);
+const tab = ref("");
 
 const jalaali = ref();
 const jalaalies = ref([]);

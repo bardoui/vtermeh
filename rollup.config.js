@@ -46,6 +46,7 @@ export default {
                 { src: "src/pagination.scss", dest: "dist" },
                 { src: "src/pie.scss", dest: "dist" },
                 { src: "src/simple-pagination.scss", dest: "dist" },
+                { src: "src/tab.scss", dest: "dist" },
                 { src: "src/tile.scss", dest: "dist" },
                 { src: "src/toggle.scss", dest: "dist" },
                 { src: "src/toman.scss", dest: "dist" },

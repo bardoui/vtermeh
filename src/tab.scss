@@ -1,0 +1,97 @@
+@use "sass:math";
+@use "@bardoui/termeh/termeh.scss" as T;
+.v-tab {
+    display: block;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .v-tab-headers {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: row;
+        align-items: flex-end;
+        overflow: hidden;
+        overflow-x: auto;
+
+        .tab {
+            @include T.transition(all);
+            @include T.unselectable();
+            @include T.control();
+            width: auto;
+            white-space: nowrap;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            padding: T.control-padding();
+            border-bottom: 1px solid T.variant("base", "separator");
+            white-space: nowrap;
+
+            &.is-filler {
+                flex: 1 1 0;
+                cursor: default;
+            }
+
+            &.is-active {
+                font-weight: bold;
+                border-bottom-color: T.color("shade");
+            }
+        }
+    }
+
+    .v-tab-content {
+        display: block;
+        box-sizing: border-box;
+    }
+
+    &.is-centered {
+        .v-tab-content {
+            display: flex;
+            > * {
+                margin: auto;
+            }
+        }
+    }
+
+    &:not(.is-paddingless) {
+        .v-tab-content {
+            padding: T.gap("micro");
+        }
+        @each $name, $gap in T.gaps(T.var("tab", "gaps", ())) {
+            &.is-#{$name}-padded {
+                .v-tab-content {
+                    padding: $gap;
+                }
+            }
+        }
+    }
+
+    @each $name, $color in T.colors(T.var("tab", "colors", ())) {
+        &.is-#{$name} {
+            .v-tab-headers {
+                .tab {
+                    &.is-active {
+                        color: T.variant($name, "readable");
+                        border-bottom-color: $color;
+                    }
+                }
+            }
+        }
+    }
+
+    @at-root {
+        .slide-enter-active,
+        .slide-leave-active {
+            @include T.transition(all);
+        }
+        .slide-enter-to,
+        .slide-leave-from {
+            transform: translateX(0);
+        }
+        .slide-enter-from {
+            transform: translateX(100%);
+        }
+        .slide-leave-to {
+            transform: translateX(-100%);
+        }
+    }
+}

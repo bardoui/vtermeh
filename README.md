@@ -441,6 +441,42 @@ pagination component have following classes:
 | :------- | :---------------------------------------------------------- | :------ |
 | colors   | list of non-iterable colors to include in pagination colors | `()`    |
 
+## Tab
+
+Tab component.
+
+```vue
+<template>
+  <vTab class="is-large-padded is-primary" v-model:tab="tab" animation="slide">
+    <template #tabs="{ style }">
+      <div class="tab" :class="style('A')" @click="tab = 'A'">A</div>
+      <div class="tab" :class="style('B')" @click="tab = 'B'">B</div>
+      <div class="tab" :class="style('C')" @click="tab = 'C'">C</div>
+    </template>
+    <template #A>A Content</template>
+    <template #B>B Content</template>
+    <template #C>C Content</template>
+  </vTab>
+</template>
+```
+
+| Property  | Type     | Description                                                                               |
+| :-------- | :------- | :---------------------------------------------------------------------------------------- |
+| animation | `String` | tab animation. contains slide animation by default. _custom animation style must defined_ |
+| tab       | `String` | active tab name                                                                           |
+
+tab component have following classes:
+
+- **is-centered**: center aligned tab content.
+- **is-paddingless**: remove tab content padding.
+- **is-{gap}-padded**: set tab content padding.
+- **is-{color}**: set tab header color.
+
+| variable | description                                          | default |
+| :------- | :--------------------------------------------------- | :------ |
+| gaps     | list of non-iterable gaps to include in tab gaps     | `()`    |
+| colors   | list of non-iterable colors to include in tab colors | `()`    |
+
 ## Tile
 
 Create optimized tile layout.

@@ -8,6 +8,7 @@ import vOptions from "./Options.vue";
 import vPagination from "./Pagination.vue";
 import vPie from "./Pie.vue";
 import vSimplePagination from "./SimplePagination.vue";
+import vTab from "./Tab.vue";
 import vTile from "./Tile.vue";
 import vToggle from "./Toggle.vue";
 import vToman from "./Toman.vue";
@@ -23,6 +24,7 @@ export {
     vPagination,
     vPie,
     vSimplePagination,
+    vTab,
     vTile,
     vToggle,
     vToman,
